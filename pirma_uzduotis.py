@@ -1,5 +1,5 @@
 a = int(input("Įveskite skaičių a "))
-b = int(input("Įveskite skaičių b "))
+b = float(input("Įveskite skaičių b "))
 if b > a:
   print("a mažesnis už b")
   print("dalyba: " + str(b/a))
