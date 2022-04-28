@@ -11,7 +11,7 @@ Papildoma užduotis:
 Padaryti taip, kad du sakiniai būtų tinkamai iškarpyti ir sujungti atgal, nepaisant jų dydžio su tuo pačiu kodu.
 """
 
-sakinys = "Ogis megsta zaislus. Arcis taip pat megsta juos."
+sakinys = "Vakar maciau dideli dangu. Siandien jo nebeliko. "
 # sakinys = "Why, why oh why, you betrayed me. I'm not gonna survive this."
 # sakinys = "Oh my, I never knew about it. Lets try it."
 
