@@ -23,9 +23,6 @@ sakinys = "Vakar maciau dideli dangu. Siandien jo nebeliko. "
 pirmas = sakinys[:sakinys.find(". ")+1].lower()
 antras = sakinys[len(pirmas)+1:].lower()
 
-print(pirmas)
-print(antras)
-
 pirmas = pirmas.capitalize()
 antras = antras.capitalize()
 

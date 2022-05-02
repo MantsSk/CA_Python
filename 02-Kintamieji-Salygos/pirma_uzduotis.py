@@ -9,3 +9,10 @@ elif a == b:
 else:
   print("a didesnis už b")
   print("dalyba: " + str(a/b))
+
+  # if a == b:
+#   print("a lygu b")
+#   print("Sudėtis: " + str(a+b))
+# if a > b:
+#   print("a didesnis už b")
+#   print("dalyba: " + str(a/b))
