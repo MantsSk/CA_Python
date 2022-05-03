@@ -1,5 +1,4 @@
 import datetime
-from typing import final
 
 try:
     ivesta = input("Įveskite metus formatu (YYYY-MM-DD) ")

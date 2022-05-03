@@ -1,6 +1,5 @@
-from sqlalchemy import true
 
-skaicius_ne_nulis = true
+skaicius_ne_nulis = True
 
 try:
     while skaicius_ne_nulis:

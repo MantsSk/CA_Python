@@ -14,7 +14,7 @@ for index in range(0,100000000):
 # print(y)
 # print(type(y))
 end_time = datetime.datetime.now() - start_time
-print("This function took: ", end_time)
+print("Append in for took: ", end_time)
 
 print("------")
 
@@ -27,6 +27,6 @@ b = [element for element in range(0,100000000)]
 # print(b)
 # print(type(b))
 end_time = datetime.datetime.now() - start_time
-print("This function took: ", end_time)
+print("List comprehension took: ", end_time)
 
 
