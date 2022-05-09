@@ -1,8 +1,6 @@
 from logging import FileHandler
 import pickle
 
-budget_info = {}
-
 def load_existing_budget():
     global budget_info
     try:
@@ -27,7 +25,7 @@ def add_budget():
     money_name = input("Įveskite išlaidų ar pajamų pavadinimą (pvz - alga): ")
     money_quantity = float(input("Įveskite išlaidų (pvz: -120) ar pajamų kiekį (pvz: 120): "))
 
-    if sum(budget_info.values()) + money_quantity < 0:  # money_quantity holds negative value that we count as expense
+    if sum(budget_info.values()) + money_quantity < 0:  # add your current budget sum and current expenses or income and chech if its < 0 
         print("Neturite tiek pinigu")
     else: 
         budget_info[money_name] = money_quantity

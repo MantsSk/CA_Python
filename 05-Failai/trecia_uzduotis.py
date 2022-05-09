@@ -23,7 +23,6 @@ Namespaces are one honking great idea -- let's do more of those!
 '''
 
 def atbulai(sakinys):
-    print(type(sakinys))
     return sakinys[::-1]
 
 def patikrinti_sakini(sakinys):
