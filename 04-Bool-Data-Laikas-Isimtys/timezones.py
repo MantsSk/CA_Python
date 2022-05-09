@@ -1,12 +1,23 @@
 import datetime
-from zoneinfo import ZoneInfo
 
-z = ZoneInfo('Poland')
-
-now = datetime.datetime.now(tz=z)  
-print(now) #2022-05-03 13:24:58.796733+00:00
-
-now_system = datetime.datetime.now() 
-print(now_system) #2022-05-03 16:25:32.413386
+x = [1,2]
+y = []
 
 
+start_time = datetime.datetime.now()
+
+for element in x:
+    y.append(element * 2)
+
+end_time = datetime.datetime.now() - start_time
+print("Append in for took: ", end_time)
+
+print("------")
+
+start_time = datetime.datetime.now()
+
+a = [1,2,3,4]
+b = [element * 2 for element in a]
+
+end_time = datetime.datetime.now() - start_time
+print("List comprehension took: ", end_time)

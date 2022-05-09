@@ -1,11 +1,11 @@
 import datetime
 
 start_time = datetime.datetime.now()
-
+our_range = range(0,100000000)
 # x = [1,2,3,4]
 y = []
 
-for index in range(0,100000000):
+for index in our_range:
     y.append(index)
 
 # for element in x:
@@ -22,7 +22,7 @@ start_time = datetime.datetime.now()
 
 # a = [1,2,3,4]
 # b = [element * 2 for element in a]
-b = [element for element in range(0,100000000)]
+b = [element for element in our_range]
 
 # print(b)
 # print(type(b))

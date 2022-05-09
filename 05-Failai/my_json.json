@@ -1,0 +1,21 @@
+{
+    "komandos":
+    [
+        {
+            "komandos_pavadinimas" : "Zalgiris",
+            "komandos_arena": "Zalgirio"
+        },
+        {
+            "komandos_pavadinimas" : "Rytas",
+            "komandos_arena": "ASG"
+        },
+        {
+            "komandos_pavadinimas" : "Neptunas",
+            "komandos_arena": "Svyturio"
+        },
+        {
+            "komandos_pavadinimas" : "Siauliai",
+            "komandos_arena": "Nezinau"
+        }
+    ]
+}
