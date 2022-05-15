@@ -2,6 +2,10 @@
 # Pou turi paspirtuka
 
 
+class TeletubyShow:
+    pass
+
+
 teletubies = TeletubyShow(TinkiWinki(), Dipsi(), LaLa(), Pou())
 [teletubie for teletubie in teletubies]
 # Turetu isspausdinti:
