@@ -1,3 +1,5 @@
+
+
 kintamasis3 = "Čia yra testinis kintamasis 3"
 
 print("mano_modulis_3 sėkmingai importuotas!")
