@@ -7,10 +7,7 @@ days = int(hours/lesson_length)
 course_date_list = []
 cancelled_dates = [
     datetime.datetime(2022,5,4,18,0,0),
-    datetime.datetime(2022,5,11,18,0,0),
-    # datetime.datetime(2022,5,18,18,0,0),
-    # datetime.datetime(2022,5,19,18,0,0),
-    # datetime.datetime(2022,5,25,18,0,0)
+    datetime.datetime(2022,5,11,18,0,0)
 ]
 
 lesson_date = datetime.datetime(2022,4,28,18,0,0)
@@ -26,6 +23,7 @@ while len(course_date_list) < days:
             lesson_date = lesson_date + datetime.timedelta(days=1)
     else:
         lesson_date = lesson_date + datetime.timedelta(days=3)
+
 
 
 for day in course_date_list:

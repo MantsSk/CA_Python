@@ -1,12 +1,15 @@
 import os
 from datetime import datetime
 
-
 katalago_pavadinimas = "Naujas Katalogas"
 failo_pavadinimas = "data.txt"
 
 os.chdir('../')
-os.mkdir(katalago_pavadinimas)
+try:
+    os.mkdir(katalago_pavadinimas)
+except FileExistsError as x:
+    print(x.__class__.__name__)
+
 os.chdir(katalago_pavadinimas)
 
 
