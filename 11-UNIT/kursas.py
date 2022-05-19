@@ -27,7 +27,7 @@ class Course:
         else:
             self._start_date = value
 
-    def __calculate_dates(self):
+    def calculate_dates(self):
         course_date_list = []
         while len(course_date_list) < self.days_count:
             weekday = self.__moving_date.isoweekday()
@@ -42,20 +42,22 @@ class Course:
         
         return course_date_list
 
+    def return_formatted_day_list(self):
+        formatted_list = []
+        for day in self.calculate_dates():
+            formatted_list.append(day.strftime("%Y - %B - %d - %A"))
 
-    def print_dates(self):
-        for day in self.__calculate_dates():
-            print(day.strftime("%Y - %B - %d - %A"))
+        return formatted_list
 
     def print_info(self):
-        self.print_dates()
+        for day in self._calculate_dates():
+            print(day)
         print(f"Kursas yra {self.name}, jo ilgis yra {self.days_count} dienos")
 
-cancelled_dates =  [datetime.date(2022, 5, 4), datetime.date(2022, 5, 11)]
-c = Course("Python", 12, 4, datetime.date(2019,4,28), cancelled_dates)
-c.print_info()
-# c.print_dates()
-print("--------")
-c2 = Course("C#", 20, 4, datetime.date(2019,4,28))
-c2.print_info()
-# c2.print_dates()
+# cancelled_dates =  [datetime.date(2022, 5, 4), datetime.date(2022, 5, 11)]
+# c = Course("Python", 12, 3, datetime.date(2023, 11,28), cancelled_dates)
+# c.print_info()
+# print("--------")
+# c2 = Course("Python", 16, 4, datetime.date(2019,4,28))
+# c2.print_info()
+

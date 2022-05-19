@@ -1,5 +1,4 @@
 
-
 class Studentas:
     def __init__(self, name, credits):
         self.name = name
@@ -21,11 +20,3 @@ class Studentas:
     def print_info(self):
         print(f"Name is {self.name} and the person has {self.credits} credits")
 
-s = Studentas("Mantas", -5)
-s.print_info()
-
-s2 = Studentas("Juozas", 22)
-s2.print_info()
-
-s3 = Studentas("Rokas", 36)
-s3.print_info()

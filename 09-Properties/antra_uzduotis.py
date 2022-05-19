@@ -1,13 +1,13 @@
 class Person():
 
-    def __init__(self, firstname, lastname):
-        self.first = firstname
-        self.last = lastname
+    def __init__(self, name, surname):
+        self.name = name
+        self.surname = surname
+
+    def email(self):
+        return '{}.{}@email.com'.format(self.name.lower(), self.surname.lower())
 
     @property
     def fullname(self):
-        return self.first + ' '+ self.last
-
-    def email(self):
-        return '{}.{}@email.com'.format(self.first.lower(), self.last.lower())
-        
+        return self.name + ' '+ self.surname
+    

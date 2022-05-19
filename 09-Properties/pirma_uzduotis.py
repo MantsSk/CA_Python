@@ -1,6 +1,3 @@
-from sqlalchemy import false
-
-
 class Player:
     def __init__(self, name, lives):
         self.name = name
@@ -22,7 +19,7 @@ class Player:
         if self.lives > 0:
             return True
 
-p = Player("Mantas", 2)
+p = Player("Mantas", -1)
 while True:
     if not p.is_alive:
         print(f"Veikejas {p.name} mire")
