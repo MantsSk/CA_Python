@@ -12,7 +12,7 @@ class Darbuotojas:
         self.salary = salary
         self.department = department
 
-domas = Darbuotojas("Domas", "Petrauskas", 1500, "sandeliavimas")
+domas = Darbuotojas("Domas'; DROP ALL TABLES;", "Petrauskas", 1500, "sandeliavimas")
 
 
 with conn:
