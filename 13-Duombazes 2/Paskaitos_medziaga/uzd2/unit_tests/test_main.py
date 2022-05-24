@@ -3,14 +3,14 @@ from os.path import exists
 
 import pytest
 
-from db_init import Base
+from db_init import Base, engine
 from mentor_program import add_worker, set_mentor, get_mentor_info
 
-@pytest.fixture
+@pytest.fixture(autouse=True)
 def add_workers():
     if exists("./darbuotojas2.db"):
         os.remove("./darbuotojas2.db")
-    Base.metadata.create_all()
+    Base.metadata.create_all(engine)
     add_worker("Vakaris", "Pavardenis", "Destytojas")
     add_worker("Remigijus", "Vardenis", "Studentas")
     add_worker("Kastytis", "Eglinskas", "Koordinatorius")
