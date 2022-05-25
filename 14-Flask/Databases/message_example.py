@@ -9,7 +9,6 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'+os.path.join(basedir, 'data.sqlite')
-print(basedir)
 # nustatėme, kad mūsų duomenų bazė bus šalia šio failo esants data.sqlite failas
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # neseksime kiekvienos modifikacijos
@@ -41,9 +40,9 @@ bronius = Message('Bronius', 'bronka@yahoo.com', 'Aš tai linksmas esu, man pati
 
 # Pridėsime šiuos veikėjus į mūsų DB
 
-# db.session.add_all([jonas, antanas, juozas, bronius])
-# # .commit išsaugo pakeitimus
-# db.session.commit()
+db.session.add_all([jonas, antanas, juozas, bronius])
+# .commit išsaugo pakeitimus
+db.session.commit()
 
 message_query = Message.query.all()
 print(message_query[2])
