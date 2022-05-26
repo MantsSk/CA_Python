@@ -27,8 +27,8 @@ class Message(db.Model):
         self.email = email
         self.message = message
 
-    def __repr__(self):
-        return f'{self.name} - {self.email}'
+    # def __repr__(self):
+    #     return f'{self.name} - {self.email}'
 
 db.create_all()  # sukurs mūsų lentelę DB
 
