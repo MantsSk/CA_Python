@@ -1,4 +1,5 @@
-from sqlalchemy import Column, Integer, String, create_engine
+from sqlalchemy import Column, Integer
+
 from db_init import Base
 
 
