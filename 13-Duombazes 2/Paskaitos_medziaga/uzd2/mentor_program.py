@@ -24,15 +24,18 @@ def get_mentor_info(mentor_name, mentor_surname) -> Sequence[dict]:
     mentor = session.query(Worker).filter(Worker.name == mentor_name).filter(
         Worker.last_name == mentor_surname).all()[0]
     mentor_id = mentor.id
-    student_ids = session.query(Mentor).filter(Mentor.mentor_id == mentor_id).all()
+    mentorships = session.query(Mentor).filter(Mentor.mentor_id == mentor_id).all()
 
-    results = []
-    for student_id in student_ids:
-        student = session.query(Worker).filter(Worker.id == student_id.student_id).first()
-        results.append(_form_results_from_student_and_mentor(student, mentor))
+    student_list = [get_student_by_id(session, mentorship.student_id) for mentorship in mentorships]
+    results = [_form_results_from_student_and_mentor(student, mentor) for student in student_list]
 
     close_session()
+
     return results
+
+
+def get_student_by_id(session, id):
+    return session.query(Worker).filter(Worker.id == id).first()
 
 
 def _form_results_from_student_and_mentor(student, mentor):

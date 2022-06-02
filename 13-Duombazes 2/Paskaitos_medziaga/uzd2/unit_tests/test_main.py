@@ -3,7 +3,6 @@ from os.path import exists
 
 import pytest
 
-from db_init import init_session, close_session
 from mentor_program import add_worker, set_mentor, get_mentor_info
 
 
