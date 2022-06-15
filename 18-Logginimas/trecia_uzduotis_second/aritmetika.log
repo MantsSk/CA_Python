@@ -1,0 +1,5 @@
+2022-06-01 20:57:12,650:ERROR:__main__:Saknis gali buti traukiama tik is skaiciaus
+Traceback (most recent call last):
+  File "/Users/mantasskara/Desktop/CA_Python/18-Logginimas/trecia_uzduotis_second/aritmetika.py", line 24, in saknis
+    rezultatas = math.sqrt(x)
+TypeError: must be real number, not str
