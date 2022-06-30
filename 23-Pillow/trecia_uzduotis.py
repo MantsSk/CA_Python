@@ -11,7 +11,7 @@ def get_list(folder):
 
 def pic_resize(pic, height):
     im = Image.open(pic)
-    width = round(im.height/im.width*height) # height,width
+    width = round(im.height/im.width*height) 
     im = im.resize((height, width))
     return im
 
