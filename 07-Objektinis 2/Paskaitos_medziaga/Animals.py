@@ -35,6 +35,7 @@ class Cat(Animal):
 
 
 tom = Cat(20)
+assert tom.tail_len == 30
 jerry = Hamster()
 giraff = Animal()
 pass
