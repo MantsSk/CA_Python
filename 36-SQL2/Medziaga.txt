@@ -1,0 +1,4 @@
+Teorija su darbuotojai.db - https://github.com/robotautas/kursas/blob/master/DB/db2/db2.md
+Uzduotys, Atsakymai su cars.db:
+https://github.com/DonatasNoreika/Python-pamokos/wiki/SQL-2-u%C5%BEduotys
+https://github.com/DonatasNoreika/Python-pamokos/wiki/SQL-2-atsakymai
