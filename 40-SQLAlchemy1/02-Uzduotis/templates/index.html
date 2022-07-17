@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+<div class = "content"> 
+    <table>
+        <tr>
+            <th>Game</th>
+            <th>Score</th>
+            <th>Added</th>
+            <th>Actions</th>
+        </tr>
+        {% for game_review in game_reviews %}
+        <tr> 
+            <td> {{ game_review.name }} </td>
+            <td> {{ game_review.score }}</td>
+            <td> {{ game_review.date_created }}</td>
+            <td>
+                <a href ="/delete/{{game_review.id}}">Delete</a>
+                <br/>
+                <a href="/update/{{game_review.id}}">Update</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </table>
+    <form action="/" method="POST">
+        <input type="text" name="name" id ="name" value="GAME">
+        <input type="number" name="score" id ="score" value=0>
+        <input type="submit" value="Add Task">
+    </form>
+</div>
+{% endblock %}
