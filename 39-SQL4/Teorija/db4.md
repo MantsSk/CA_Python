@@ -120,6 +120,31 @@ INSERT INTO "tasks" ("name", "coder_id") VALUES ('Ištestuoti programą', '4');
 INSERT INTO "tasks" ("name", "coder_id") VALUES ('Perdaryti API', '4');
 ```
 
+
+## One to one
+
+Retai naudojamas ryšys, nes galima paprasčiausiai sudėti duomenis į tą pačią lentelę. Tarkime, kad norime paslėpti dalį informacijos, kad nesimatytų pagrindinėje lentelėje:
+
+```sql
+CREATE TABLE passwords (
+	id integer PRIMARY KEY,
+	coder_id integer UNIQUE,
+	pwd string,
+	FOREIGN KEY (coder_id) REFERENCES coders (id)
+);
+```
+
+Ryšys kuriamas taip pat, kaip ir one to many, tik išoriniam raktui pritaikomas UNIQUE apribojimas. Užpildykime:
+
+```sql
+INSERT INTO "passwords" ("coder_id", "pwd") VALUES ('1', '12345');
+INSERT INTO "passwords" ("coder_id", "pwd") VALUES ('2', 'verisykret');
+INSERT INTO "passwords" ("coder_id", "pwd") VALUES ('3', 'qwerty');
+INSERT INTO "passwords" ("coder_id", "pwd") VALUES ('4', 'uauauai');
+INSERT INTO "passwords" ("coder_id", "pwd") VALUES ('5', 'slaptazodis');
+INSERT INTO "passwords" ("coder_id", "pwd") VALUES ('6', 'barzda');
+```
+
 ## Many to many
 
 Sakykime, kad reikia darbuotojus kažkaip susieti su turimomis kompetencijomis. Pirmiausia sukurkime lentelę skills:
@@ -142,7 +167,7 @@ INSERT INTO "skills" ("name") VALUES ('AWS');
 INSERT INTO "skills" ("name") VALUES ('Linux');
 ```
 
-Turime situaciją, kai daug žmonių gali turėti daug kompetencijų ir atvirkščiai (*pritempta*). Gaunasi many-to-many ryšys. Tam, kad susikurtų toks ryšys, turime turėti tarpinę lentelę:
+Turime situaciją, kai daug žmonių gali turėti daug kompetencijų ir atvirkščiai. Gaunasi many-to-many ryšys. Tam, kad susikurtų toks ryšys, turime turėti tarpinę lentelę:
 
 ```sql
 CREATE TABLE coders_skills (
@@ -169,29 +194,6 @@ INSERT INTO "coders_skills" ("coder_id", "skill_id") VALUES ('5', '5');
 INSERT INTO "coders_skills" ("coder_id", "skill_id") VALUES ('6', '5');
 INSERT INTO "coders_skills" ("coder_id", "skill_id") VALUES ('6', '6');
 ```
-## One to one
-
-Retai naudojamas ryšys, nes galima paprasčiausiai sudėti duomenis į tą pačią lentelę. Tarkime, kad norime paslėpti dalį informacijos, kad nesimatytų pagrindinėje lentelėje:
-
-```sql
-CREATE TABLE passwords (
-	id integer PRIMARY KEY,
-	coder_id integer UNIQUE,
-	pwd string,
-	FOREIGN KEY (coder_id) REFERENCES coders (id)
-);
-```
-
-Ryšys kuriamas taip pat, kaip ir one to many, tik išoriniam raktui pritaikomas UNIQUE apribojimas. Užpildykime:
-
-```sql
-INSERT INTO "passwords" ("coder_id", "pwd") VALUES ('1', '12345');
-INSERT INTO "passwords" ("coder_id", "pwd") VALUES ('2', 'verisykret');
-INSERT INTO "passwords" ("coder_id", "pwd") VALUES ('3', 'qwerty');
-INSERT INTO "passwords" ("coder_id", "pwd") VALUES ('4', 'uauauai');
-INSERT INTO "passwords" ("coder_id", "pwd") VALUES ('5', 'slaptazodis');
-INSERT INTO "passwords" ("coder_id", "pwd") VALUES ('6', 'barzda');
-```
 
 Galutinis mūsų duomenų bazės variantas atrodo taip:
 ![Pvz](https://user-images.githubusercontent.com/22573801/179459822-7bd68536-66e0-45b9-988e-4d8348b8abce.PNG)
@@ -200,8 +202,9 @@ Sugeneruota su DBSchema:
 https://dbschema.com/
 
 
-
-
-
-
+Papildomos iliustracijos ir pavyzdžiai:
+![image](https://user-images.githubusercontent.com/22573801/179476138-9cfc988f-12f5-4c0e-bf4d-7b2a5a8cc86e.png)
+![image](https://user-images.githubusercontent.com/22573801/179476147-55cc08f0-1838-474e-be3d-ce0262274b85.png)
+![image](https://user-images.githubusercontent.com/22573801/179476178-62b52048-6c0a-46b8-92cd-c6da4bb8c20d.png)
+https://medium.com/@emekadc/how-to-implement-one-to-one-one-to-many-and-many-to-many-relationships-when-designing-a-database-9da2de684710
 
