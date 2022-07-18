@@ -209,3 +209,6 @@ Papildomos iliustracijos ir pavyzdžiai:
 ![image](https://user-images.githubusercontent.com/22573801/179476178-62b52048-6c0a-46b8-92cd-c6da4bb8c20d.png)
 https://medium.com/@emekadc/how-to-implement-one-to-one-one-to-many-and-many-to-many-relationships-when-designing-a-database-9da2de684710
 
+## ON DELETE and ON UPDATE Actions (PAPILDOMAI)
+
+Papildomai galite pasiskaityti čia - https://www.sqlite.org/foreignkeys.html (4.3 sekcija). Galime nustatyti veiksmus, kurie bus pritaikomi duomenims jei duomenys į kuriuos referuoja Foreign Key keisis. 
