@@ -1,5 +1,8 @@
 # Duomenų išrinkimas iš kelių lentelių
 
+Database galite parsisiųsti iš: 
+https://github.com/MantasSkara/CA_Python/blob/master/38-SQL3/teorija.db
+
 Yra du pagrindiniai būdai jungti duomenis iš skirtingų lentelių, vienas iš jų yra naudojant WHERE:
 
 ```sql
