@@ -5,16 +5,18 @@
 <div class = "content"> 
     <table>
         <tr>
-            <th>Game</th>
+            <th>Game Name</th>
+            <th>Game Description</th>
             <th>Score</th>
-            <th>Added</th>
+            <th>Date Added</th>
             <th>Actions</th>
         </tr>
         {% for game_review in game_reviews %}
         <tr> 
             <td> {{ game_review.name }} </td>
+            <td> {{ game_review.description }} </td>
             <td> {{ game_review.score }}</td>
-            <td> {{ game_review.date_created }}</td>
+            <td> {{ game_review.date_added }}</td>
             <td>
                 <a href ="/delete/{{game_review.id}}">Delete</a>
                 <br/>
@@ -24,9 +26,25 @@
     {% endfor %}
     </table>
     <form action="/" method="POST">
-        <input type="text" name="name" id ="name" value="GAME">
+        <h1> Enter info </h1>
+
+        <label for="name">Enter Game Name:</label>
+        <input type="text" name="name" id ="name">
+        <br/>
+        <br/>
+
+        <label for="score">Enter Game Description:</label>
+        </br>
+        <textarea id="description" name="description" rows="4" cols="50"></textarea>        
+        <br/>
+        <br/>
+
+        <label for="score">Enter Game Score:</label>
         <input type="number" name="score" id ="score" value=0>
-        <input type="submit" value="Add Task">
+        <br/>
+        <br/>
+
+        <input type="submit" value="Add Game">
     </form>
 </div>
 {% endblock %}

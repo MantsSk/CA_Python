@@ -3,8 +3,26 @@
 {% block body %}
 <div class = "content"> 
     <form action="/update/{{game_review.id}}" method="POST">
-        <input type="text" name="content" id ="content" value="{{task.content}}">
-        <input type="submit" value="Update Task">
+
+        <h1> Enter info </h1>
+
+        <label for="name">Enter Game Name:</label>
+        <input type="text" name="name" id ="name" value="{{game_review.name}}">>
+        <br/>
+        <br/>
+
+        <label for="score">Enter Game Description:</label>
+        </br>
+        <textarea id="description" name="description" rows="4" cols="50">{{game_review.description}}</textarea>        
+        <br/>
+        <br/>
+
+        <label for="score">Enter Game Score:</label>
+        <input type="number" name="score" id ="score" value="{{game_review.score}}">
+        <br/>
+        <br/>
+
+        <input type="submit" value="Update Game">
     </form>
 </div>
 {% endblock %}
