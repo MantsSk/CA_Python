@@ -81,7 +81,7 @@ CREATE TABLE coders (
   FOREIGN KEY (team_id) REFERENCES teams (id)
 );
 ```
-Ryšys sukuriamas išorinio rakto - FOREIGN KEY pagalba. Paskutinėje eilutėje nurodoma, kad team_id stulpelis bus išorinis raktas ir referuos į person lentelės id, kuris turėtų būti pirminis raktas (unikalus indentifikatorius).
+Ryšys sukuriamas išorinio rakto - FOREIGN KEY pagalba. Paskutinėje eilutėje nurodoma, kad team_id stulpelis bus išorinis raktas ir referuos į teams lentelės id, kuris turėtų būti pirminis raktas (unikalus indentifikatorius).
 
 Pridėkime lentelę tasks, kurioje vienas programuotojas galės turėti daug užduočių:
 
@@ -202,11 +202,9 @@ Sugeneruota su DBSchema:
 https://dbschema.com/
 
 
-Papildomos iliustracijos ir pavyzdžiai:
-![image](https://user-images.githubusercontent.com/22573801/179476138-9cfc988f-12f5-4c0e-bf4d-7b2a5a8cc86e.png)
-![image](https://user-images.githubusercontent.com/22573801/179476147-55cc08f0-1838-474e-be3d-ce0262274b85.png)
-![image](https://user-images.githubusercontent.com/22573801/179476376-cdb66220-2d56-4f12-92b5-11fcbffea84a.png)
-![image](https://user-images.githubusercontent.com/22573801/179476178-62b52048-6c0a-46b8-92cd-c6da4bb8c20d.png)
+Naudingos iliustracijos ir pavyzdžiai:
+https://www.tutorialsteacher.com/sqlserver/tables-relations
+
 https://medium.com/@emekadc/how-to-implement-one-to-one-one-to-many-and-many-to-many-relationships-when-designing-a-database-9da2de684710
 
 ## ON DELETE and ON UPDATE Actions (PAPILDOMAI)
