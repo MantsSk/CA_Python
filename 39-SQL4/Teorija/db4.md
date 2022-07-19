@@ -204,6 +204,7 @@ https://dbschema.com/
 
 Naudingos iliustracijos ir pavyzdžiai:
 https://www.tutorialsteacher.com/sqlserver/tables-relations
+
 https://medium.com/@emekadc/how-to-implement-one-to-one-one-to-many-and-many-to-many-relationships-when-designing-a-database-9da2de684710
 
 ## ON DELETE and ON UPDATE Actions (PAPILDOMAI)
