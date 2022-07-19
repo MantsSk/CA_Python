@@ -81,7 +81,7 @@ CREATE TABLE coders (
   FOREIGN KEY (team_id) REFERENCES teams (id)
 );
 ```
-Ryšys sukuriamas išorinio rakto - FOREIGN KEY pagalba. Paskutinėje eilutėje nurodoma, kad team_id stulpelis bus išorinis raktas ir referuos į person lentelės id, kuris turėtų būti pirminis raktas (unikalus indentifikatorius).
+Ryšys sukuriamas išorinio rakto - FOREIGN KEY pagalba. Paskutinėje eilutėje nurodoma, kad team_id stulpelis bus išorinis raktas ir referuos į teams lentelės id, kuris turėtų būti pirminis raktas (unikalus indentifikatorius).
 
 Pridėkime lentelę tasks, kurioje vienas programuotojas galės turėti daug užduočių:
 
