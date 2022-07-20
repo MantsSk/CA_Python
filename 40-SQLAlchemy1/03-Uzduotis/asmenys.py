@@ -1,13 +1,13 @@
 
-from dbcon import *
+import dbcon
 from tkinter import Tk, Frame, Label, Entry, Button, Listbox, SINGLE, END
 
 asmuo_edit = False
-get_all_records_list()
+dbcon.get_all_records_list()
 
 def update_fields():
     boksas.delete(0, END)
-    boksas.insert(END, *get_all_records_list())
+    boksas.insert(END, *dbcon.get_all_records_list())
     laukas1.delete(0, 'end')
     laukas2.delete(0, 'end')
     laukas3.delete(0, 'end')
@@ -16,20 +16,20 @@ def update_fields():
 def ui_add(event):
     global asmuo_edit
     if asmuo_edit:
-        update_record(asmuo_edit.id, laukas1.get(), laukas2.get(), laukas3.get())
+        dbcon.update_record(asmuo_edit.id, laukas1.get(), laukas2.get(), laukas3.get())
         asmuo_edit = False
     else:
-        add_record(laukas1.get(), laukas2.get(), laukas3.get())
+        dbcon.add_record(laukas1.get(), laukas2.get(), laukas3.get())
     update_fields()
 
 def ui_delete():
-    aktyvus = get_all_records_list()[boksas.curselection()[0]]
-    delete_record(aktyvus.id)
+    aktyvus = dbcon.get_all_records_list()[boksas.curselection()[0]]
+    dbcon.delete_record(aktyvus.id)
     update_fields()
 
 def ui_edit():
     global asmuo_edit
-    asmuo_edit = get_all_records_list()[boksas.curselection()[0]]
+    asmuo_edit = dbcon.get_all_records_list()[boksas.curselection()[0]]
     update_fields()
     laukas1.insert(0, asmuo_edit.name)
     laukas2.insert(0, asmuo_edit.surname)
@@ -42,7 +42,7 @@ main_window.title("Asmenų katalogas")
 top_frame = Frame(main_window)
 button_frame = Frame(main_window)
 boksas = Listbox(button_frame, selectmode=SINGLE)
-boksas.insert(END, *get_all_records_list())
+boksas.insert(END, *dbcon.get_all_records_list())
 uzrasas1 = Label(top_frame, text="Įveskite asmenį", width=40)
 laukas1 = Entry(top_frame)
 laukas1_uzr = Label(top_frame, text="Vardas")

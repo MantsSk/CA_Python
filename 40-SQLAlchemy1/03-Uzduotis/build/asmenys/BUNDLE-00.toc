@@ -1,0 +1,3 @@
+([('asmenys',
+   '/Users/mantasskara/Desktop/CA_Python/40-SQLAlchemy1/03-Uzduotis/dist/asmenys',
+   'EXECUTABLE')],)
