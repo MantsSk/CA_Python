@@ -13,7 +13,7 @@ with conn:
     skyrius text
     )""")
 
-    c.execute(f"INSERT INTO vadovai VALUES ('x, y, z')")
+    c.execute(f"INSERT INTO vadovai VALUES ('x, y, z'); INSERT INTO vadovai VALUES ('x, y, p')")
 
     c.execute(f"SELECT * FROM vadovai WHERE vardas='z'")
     a = c.fetchall()
