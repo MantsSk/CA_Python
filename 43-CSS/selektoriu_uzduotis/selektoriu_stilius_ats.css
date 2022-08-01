@@ -1,0 +1,12 @@
+p {
+    background: red;
+    font-weight: bold;
+}
+
+p.paragrafas-1{
+    background: green;
+}
+
+a {
+    background: pink
+}

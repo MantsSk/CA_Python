@@ -1,0 +1,26 @@
+p, h1 {
+    background: gray;
+}
+
+p { color: blue;
+    font-size: 30px;
+}
+
+h1.mano {
+    font-weight: 300px;
+    background: green;
+}
+
+#mano2 {
+    background: yellow;
+}
+
+p[style] {
+    background: black;
+}
+
+a[style]:hover {
+    background: black;
+}
+
+
