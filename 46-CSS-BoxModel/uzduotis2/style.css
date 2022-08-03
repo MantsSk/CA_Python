@@ -11,7 +11,7 @@ body {
   header,
   section {
     width: 600px;
-    margin: 0 auto;
+    margin: 0 500px;
     background: #f9f9f9;
     border-radius: 5px;
     padding: 30px;
