@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Table without collapsed borders</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        td,
+        th {
+        border: 1px solid #999;
+        padding: 0.5rem;
+        }
+
+        table {
+        border-collapse: collapse;
+        }
+
+        tfoot{
+          text-align: right;
+        }
+    </style>
+  </head>
+  <body>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Surname</th>
+          <th>Favorite Color</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Jim</td>
+          <td>Hopper</td>
+          <td>Blue</td>
+        </tr>
+        <tr>
+          <td>Sue</td>
+          <td>Lin</td>
+          <td>Red</td>
+        </tr>
+        <tr>
+          <td colspan=2>Madonna</td>
+          <td>Green</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3">Total: 3</td>
+        </tr>
+      </tfoot>
+    </table>
+  </body>
+</html>

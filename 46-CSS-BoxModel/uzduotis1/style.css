@@ -9,11 +9,11 @@ header {
   nav {
     background: rgb(11, 104, 11);
     padding: 10px 0;
+    text-decoration: none;
   }
   
   nav a {
     color: white;
-    text-decoration: none;
     margin: 0 20px;
   }
   
