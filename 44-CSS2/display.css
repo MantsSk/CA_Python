@@ -1,0 +1,11 @@
+div.dezute-1 a.dezute-1:hover {
+    background-color: red;
+}
+
+div.dezute-1 a.dezute-1[href]:hover {
+    background-color: blue;
+}
+
+p span {
+    color: red;
+}
