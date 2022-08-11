@@ -1,86 +1,83 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
+<html>
+<head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <title>Page Title</title>
+    <meta name="description" content="This is some website">
+    <title>Insurance</title>
+    <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-    <header>
-        <div class="content-wrapper">
-            <img src="https://cdn.freebiesupply.com/logos/large/2x/aviva-logo-black-and-white.png" alt="Aviva logo">
-            <h1>Aviva Group</h1>
-            <nav>
-                <a href="#">About</a>
-                <a href="#">Tables</a>
-                <a href="#">Contacts</a>
-            </nav>
-        </div>
-    </header>
 
-    <main>
-        <section id="about">
-            <div class="content-wrapper">
-                <h2>About</h2>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla at feugiat odio. Vestibulum vel libero id sapien rutrum porta. Aliquam tempor velit ac ipsum tincidunt commodo. Donec accumsan venenatis congue. In blandit in mauris non laoreet. Vestibulum placerat et lacus a lacinia. Vestibulum viverra molestie consectetur. Sed tristique, dui eu facilisis auctor, ante tortor blandit arcu, vel efficitur risus enim sed tellus. Aliquam mollis turpis ac sem finibus pellentesque. Maecenas id scelerisque neque. Quisque sollicitudin lectus nec nibh tristique iaculis. Aenean erat libero, scelerisque quis hendrerit at, luctus ac nunc. Maecenas efficitur enim at metus laoreet, suscipit dignissim arcu pretium.
-                </p>
-                <a href="#tables">Go down!</a>
-            </div>
-        </section>
+<header id="header">
+    <img src="https://www.aviva.aero/images/AVIVA%20Aviation%20Supply%20PNG%20TOTAL%20WHITE.png"
+         alt="Isurance logo"
+    width="300"/>
+    <h1>Aviva group</h1>
+    <nav>
+        <a href="#about">About</a>
+        <a href="#tables">Tables</a>
+        <a href="#contacts">Contact</a>
+    </nav>
+</header>
 
-        <section id="tables">
-            <div class="content-wrapper">
-                <h2>Tables</h2>
-                <table>
-                    <tr>
-                        <th>Vardas</th>
-                        <th>Pavardė</th>
-                    </tr>
-                    <tr>
-                        <td>Jonas</td>
-                        <td>Smiltinis</td>
-                    </tr>
-                    <tr>
-                        <td>Jonas</td>
-                        <td>Smiltinis</td>
-                    </tr>
-                    <tr>
-                        <td>Jonas</td>
-                        <td>Smiltinis</td>
-                    </tr>
-                    <tr>
-                        <td>Jonas</td>
-                        <td>Smiltinis</td>
-                    </tr>
-                    <tr>
-                        <td>Jonas</td>
-                        <td>Smiltinis</td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">5 people</td>
-                    </tr>
-                </table>
-            </div>
-        </section>
+<main>
+    <section class="about" id="about">
+        <h2>About</h2>
+        <p>An Introduction is essential reading and will provide you with a thorough understanding of all the main areas including motor, property, financial and marine insurance. The book contains the latest case law and best practice with reference to problem areas including fraudulent claims, third party rights against insurers and construing insurance terms. Comprehensive guidance on all key areas from the duty of utmost good faith to choice of law and jurisdictional issues is given by the leading legal experts in the insurance industry</p>
+        <a href="#footer"><h3 class="go_table"><span>Go down</span></h3></a>
+    </section>
+    <section class="table" id="tables">
+        <h2>Tables</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Surname</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>John</td>
+                <td style="text-align: right">Doe</td>
+            </tr>
+            <tr>
+                <td>Alice</td>
+                <td style="text-align: right">Cooper</td>
+            </tr>
+            <tr>
+                <td>Barack</td>
+                <td style="text-align: right">Obama</td>
+            </tr>
+            <tr>
+                <td>Toyota</td>
+                <td style="text-align: right">Hillux</td>
+            </tr>
+            <tr>
+                <td>Samurai</td>
+                <td style="text-align: right">Jack</td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="2"> 5 People</td>
+            </tr>
+            </tfoot>
+        </table>
+    </section>
+    <section class="contacts" id="contacts">
+        <h2>Contacts</h2>
+        <ul>
+            <li>The Group</li>
+            <li>+45 362 3628</li>
+            <li>info@group.com</li>
+        </ul>
+    </section>
+    <a href="#header"><h3 class="up">Go up!</h3></a>
+</main>
 
-        <section id="contacts">
-            <div class="content-wrapper">
-                <h2>Contacts</h2>
-                <ul>
-                    <li>Aviva Group</li>
-                    <li>+370 675 74401</li>
-                    <li>email@aviva.lt</li>
-                </ul>
-                <a href="#">Go up!</a>
-            </div>
-        </section>
-    </main>
-    <footer>
-        Copyright. Aviva.
-    </footer>
+<footer id="footer">
+<p>Copyright - Aviva</p>
+</footer>
+
 </body>
 </html>

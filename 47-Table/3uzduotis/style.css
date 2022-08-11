@@ -1,107 +1,78 @@
-body {
-    color: #fffff0;
-  }
-  
-  .content-wrapper {
-    max-width: 960px;
-    margin: 0 auto;
-  }
-  
-  header {
-    background-color: #010214;
-    text-align: center;
-  }
-  
-  header img {
-    width: 200px;
-  }
-  
-  header h1 {
-    text-align: left;
-    color: white;
-  }
-  
-  header nav {
-    text-align: right;
-    background-color: #d6b731;
-    padding: 20px;
-  }
-  
-  header nav a {
-    margin-right: 20px;
-    color: white;
-    text-decoration: none;
-  }
-  
-  header nav a:last-child {
-    margin-right: 0;
-  }
-  
-  header nav a:hover {
-    text-decoration: underline;
-  }
-  
-  section .content-wrapper {
-    padding: 20px 0;
-  }
-  
-  #about,
-  #contacts {
-    color: black;
-    text-align: center;
-  }
-  
-  #about h2 {
-    text-align: left;
-  }
-  
-  #about p {
-    text-align: justify;
-    margin-bottom: 30px;
-  }
-  
-  #about a {
-    padding: 10px 50px;
-    background-color: #d11e00;
-    border-radius: 10px;
-    color: white;
-  }
-  
-  #tables {
-    background-color: #021749;
-  }
-  
-  table,
-  th,
-  td {
-    border: 2px solid #d11e00;
-    border-collapse: collapse;
-  }
-  
-  table {
-    width: 100%;
-  }
-  
-  td {
-    padding: 10px;
-    text-align: center;
-  }
-  
-  td:last-child,
-  tr:last-child {
-    text-align: right;
-    font-weight: bold;
-  }
-  
-  #contacts h2,
-  #contacts ul {
-    text-align: left;
-  }
-  
-  footer {
-    text-align: center;
-    background-color: #d6b731;
-    padding: 20px 0;
-    color: white;
-  }
-  
+header {
+background: black;
+text-align: center;
+}
+
+header h1{
+color: white;
+text-align: left;
+margin-left: 3rem;
+margin-right: 3rem;
+}
+
+nav {
+background: orange;
+text-align: right;
+padding: 0.5rem;
+margin: 0.5rem;
+margin-left: 3rem;
+margin-right: 3rem;
+}
+
+nav a{
+color: white;
+text-decoration: none;
+}
+
+.about {
+margin-left: 3rem;
+margin-right: 3rem;
+}
+
+.go_table {
+text-align: center;
+}
+
+.go_table span {
+background-color: red;
+padding: 0.5rem;
+border-radius: 1rem;
+}
+
+.table {
+margin-left: 3rem;
+margin-right: 3rem;
+padding-bottom: 2rem;
+background: darkblue;
+color: white;
+}
+
+table {
+border-collapse: collapse;
+text-align: center;
+table-align: center;
+margin-left:auto;
+margin-right:auto;
+width: 90%;
+}
+
+table td, th {
+border: 2px solid #999;
+padding: 0.5rem;
+border-color: red;
+}
+
+.contacts {
+margin-left: 3rem;
+margin-right: 3rem;
+}
+
+.up{
+text-align: center;
+}
+
+footer {
+text-align: center;
+background: orange;
+padding: 0.25rem;
+}

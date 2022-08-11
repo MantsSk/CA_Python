@@ -1,0 +1,46 @@
+.l-heading {
+    font-size: 4rem;
+}
+
+.m-heading {
+    font-size: 3rem;
+    font-weight: 300;
+}
+
+.headabout {
+    font-size: 3rem;
+}
+
+#apartaments .intro {
+    padding: 1rem 3.5rem;
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    font-weight: 100;
+    line-height: 3rem;
+    font-family: 'Open Sans';
+    font-style: italic;
+}
+
+#entertainments h3 {
+    font-size: 2rem;
+}
+
+#entertainments .ent-container .entintro {
+    font-size: 0.8rem;
+    text-align: center;
+    border-bottom: 1px solid rgba(190, 190, 190, 0.317);
+    font-weight: 100;
+    line-height: 1.5;
+}
+
+#entertainments .ent-container .ent-infos-container .ent-info-item p {
+    font-size: 0.8rem;
+}
+
+#entertainments .ent-container i {
+    font-size: 3rem;
+}
+
+#entertainments .ent-container {
+    flex: 1.3;
+}
