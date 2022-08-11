@@ -4,15 +4,14 @@
 <style>
 .flex-container {
   display: flex;
-  justify-content: center;
-  background-color: DodgerBlue;
-  height: 300px;
   flex-wrap: wrap;
+  background-color: DodgerBlue;
 }
 
 .flex-container > div {
   background-color: #f1f1f1;
-  margin: 10px;
+  width: 100px; /* 100 */
+  margin: 10px; /* 20*2=40 */
   text-align: center;
   line-height: 75px;
   font-size: 30px;
@@ -21,15 +20,20 @@
 </head>
 <body>
 
-<h1>The justify-content Property</h1>
+<h1>The flex-wrap Property</h1>
 
-<p>The "justify-content: center;" aligns the flex items at the center of the container:</p>
+<p>The "flex-wrap: wrap;" specifies that the flex items will wrap if necessary:</p>
 
 <div class="flex-container">
   <div>1</div>
   <div>2</div>
   <div>3</div>  
+  <div>4</div> 
 </div>
+
+<p>Try resizing the browser window.</p>
 
 </body>
 </html>
+
+
