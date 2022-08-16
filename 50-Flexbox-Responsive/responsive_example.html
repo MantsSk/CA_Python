@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
 
 <style>
 body {
@@ -10,17 +10,19 @@ body {
 }
 
 /* On screens that are 992px wide or less, the background color is blue */
-@media screen and (max-width: 992px) {
+
+
+/* On screens that are 600px wide or less, the background color is olive */
+@media screen and (max-width: 1168px) {
   body {
-    background-color: blue;
+    background-color: green;
     color: white;
   }
 }
 
-/* On screens that are 600px wide or less, the background color is olive */
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 992px) {
   body {
-    background-color: green;
+    background-color: blue;
     color: white;
   }
 }
