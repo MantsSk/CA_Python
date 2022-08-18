@@ -1,1 +1,0 @@
-// sugalvot kazka geresnio
