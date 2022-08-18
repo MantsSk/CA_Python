@@ -15,6 +15,8 @@ if (true) {
     console.log(x)
 }
 
+var name;
+
 console.log(x)
 
 // python example

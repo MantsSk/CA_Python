@@ -7,3 +7,6 @@ for (let x of cars) {
 }
 
 console.log(text)
+
+var test = "Rokas Pakenas"
+test
