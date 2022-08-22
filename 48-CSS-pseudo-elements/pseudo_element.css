@@ -1,0 +1,23 @@
+p::first-letter {
+  font-size: 200%;
+  color: #8A2BE2;
+}
+
+//.textas::first-line {
+//  font-weight: bold;
+//}
+
+span {
+   color: blue;
+   font-size: 1.1em;
+   font-weight: bold;
+}
+
+span::before {
+ content: "Imagine this:";
+}
+
+span::after {
+ content: "Our wonderful styling is done :(";
+ color: purple;
+}

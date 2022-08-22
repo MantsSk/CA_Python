@@ -1,0 +1,49 @@
+div {
+    height: 100px;
+    width: 100px;
+    background-color: black;
+    margin-bottom: 20px;
+}
+
+div:nth-child(1) {
+    background: blue;
+}
+
+div:first-of-type {
+    background: red;
+}
+
+div:first-child {
+    background: purple;
+}
+
+div:nth-last-child(7) {
+    background: grey;
+}
+
+#lname:hover {
+    background:grey;
+}
+
+#email:focus {
+    border: 5px solid black;
+}
+
+#email:focus-visible {
+    border: 5px solid black;
+}
+
+button:focus-visible {
+    border: 5px solid pink;
+}
+
+input:checked {
+    background: green;
+    color: green;
+  height: 50px;
+  width: 50px;
+}
+
+input[type="text"]:disabled {
+  background: #dddddd;
+}

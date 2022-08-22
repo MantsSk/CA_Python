@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./nth.css">
+    <style>
+   ul li{
+       background-color: #222222;
+       width: 50px;
+       height: 50px;
+       border-radius: 50%;
+       display: inline-block;
+       margin: 30px;
+   }
+   ul li:nth-last-child(6){
+    background-color: #18bdf6ff;
+   }
+
+    </style>
+</head>
+<body>
+<ul>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+
+<table>
+    <tr>
+        <td>This</td>
+        <td>Little</td>
+        <td>Piggy</td>
+        <td>Went</td>
+        <td>To</td>
+        <td>Market</td>
+    </tr>
+    <tr>
+        <td colspan="2">This</td>
+        <td>Little</td>
+        <td>Piggy</td>
+        <td>Went</td>
+        <td>To</td>
+    </tr>
+    <tr>
+        <td colspan="4">This</td>
+        <td rowspan="3">Little</td>
+        <td>Piggy</td>
+    </tr>
+    <tr>
+        <td rowspan="2">This</td>
+        <td>Little</td>
+        <td>Piggy</td>
+        <td>Went</td>
+        <td>To</td>
+    </tr>
+    <tr>
+        <td>Little</td>
+        <td>Piggy</td>
+        <td>Went</td>
+        <td>To</td>
+    </tr>
+</table>
+</body>
+</html>

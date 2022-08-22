@@ -1,0 +1,11 @@
+p:first-child{
+ background: green;
+}
+
+p:first-of-type{
+ background: red;
+}
+
+.dezute-1:only-of-type{
+    background:purple;
+}

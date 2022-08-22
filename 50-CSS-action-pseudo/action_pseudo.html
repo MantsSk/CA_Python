@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="./action_pseudo.css">
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+<form action="#" method="get">
+    <fieldset>
+        <legend>How people call you:</legend>
+        <label for="fname">First name:</label>
+        <input type="text" id="fname" name="fname" required placeholder="First name"><br><br>
+        <label for="lname">Last name:</label>
+        <input type="text" id="lname" name="lname" maxlength="4"><br><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" autocomplete="off"><br><br>
+        <label for="pass">Passwors:</label>
+        <input type="password" id="pass" name="password" minlength="7"><br><br>
+        <label for="apie">Apie tave:</label>
+        <textarea id="apie" name="apie"></textarea><br><br>
+
+        <input name="asmens-kodas" hidden value="39607025678"/>
+    </fieldset>
+    <fieldset>
+        <legend>Our policies:</legend>
+        <input type="checkbox" checked name="email-agree">Agree to get emails</input>
+        <input type="checkbox" name="email-agree">Agree to our privacy policy</input>
+        <legend>Your gender</legend>
+        <input type="radio" name="gender">Male</input>
+        <input type="radio" checked name="gender">Female</input>
+        <input type="radio" checked name="gender" value="blue">BlueRedYello</input>
+        <input type="radio" name="gender" value="green">GreenPinkViolet</input>
+    </fieldset>
+    <fieldset>
+        <legend>Ikelkite megstamiausia kaciuko nuotrauka</legend>
+        <input type="file" name="kaciukas" multiple/>
+    </fieldset>
+    <fieldset>
+        <label for="favorite-movie">Megstamiausias filmas:</label>
+        <select name="favorite-movie" id="favorite-movie">
+            <option value="tarybu piratai">Tarybu piratai</option>
+            <option value="halkas">Halkas</option>
+            <option value="zmogus-noras" selected>Zmogus noras</option>
+        </select>
+        <br/>
+
+        <label>Megstamiausia spalva (vel :))</label>
+        <input name="second-favorite-color" type="color"/>
+
+        <label>Megstamaas maistas:</label>
+        <select name="food" multiple>
+            <option value="bacon">Bacon</option>
+            <option value="salad">Salad</option>
+            <option value="kebabs">Kebabs</option>
+        </select>
+    </fieldset>
+    <fieldset>
+        <legend>For fun</legend>
+        <label>Who's the best?</label>
+        <input value="Vakaris" readonly/>
+        <label>No, but really, who?</label>
+        <input value="Vakaris" disabled/>
+        <br/>
+        <label>Input a number I will try to guess</label>
+        <input type="number" min="0"/>
+    </fieldset>
+    <fieldset>
+        <legend>How old are you:</legend>
+        <label for="birthday">Birthday:</label>
+        <input type="date" id="birthday" name="birthday"><br><br>
+        <input type="submit" value="Submit" autofocus class="btn btn-primary">
+        <input type="reset" value="Reset">
+        <button type="submit">I am button</button>
+    </fieldset>
+</form>
+</body>
+</html>
