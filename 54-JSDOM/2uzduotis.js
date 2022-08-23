@@ -1,0 +1,1 @@
+document.querySelector('.bluetext > span').textContent = 'blue';
