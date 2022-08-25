@@ -6,7 +6,7 @@
 //     event.target.style.color = "red";
 //   });
 
-// 2-3 
+// 2
 // const button = document.querySelector('button');
 // button.style.cssText = 'position:absolute; top:0; left:0;';
 
