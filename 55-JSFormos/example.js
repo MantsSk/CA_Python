@@ -5,10 +5,10 @@ const priceDisplay = document.getElementById("price");
 function handleFormSubmit(event) {
   event.preventDefault()
   const price = 6;
-  const age = Number(ageInput.value);
+  const age = Number(event.target.elements.age.value);
 
-  console.log(event.target.elements.input.value)
-  console.log(typeof(event.target.elements.input.value))
+  console.log(event.target.elements.age.value)
+  console.log(typeof(event.target.elements.fasfaf.value))
 
   if (age >= 60) {
     priceDisplay.textContent = (0.5 * price).toFixed(2);

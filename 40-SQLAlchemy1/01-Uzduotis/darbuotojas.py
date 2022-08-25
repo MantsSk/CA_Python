@@ -1,11 +1,11 @@
 import datetime
-from sqlalchemy import Column, Integer, String, Float, DateTime, create_engine
+from sqlalchemy import Column, Integer, String, Float, DateTime, create_engine # geberuc types
 from sqlalchemy.ext.declarative import declarative_base
 
 engine = create_engine('sqlite:///darbuotojai.db')
 Base = declarative_base()
 
-class Darbuotojas(Base):
+class Darbuotojas(Base, echo=t):
     __tablename__ = 'Darbuotojas'
     id = Column(Integer, primary_key=True)
     name = Column("Pavadinimas", String)
@@ -25,4 +25,4 @@ class Darbuotojas(Base):
     def __repr__(self):
         return f"{self.id} {self.name} {self.last_name}, {self.position} {self.working_since}"
 
-Base.metadata.create_all(engine)
+Base.metadata.create_all(engine) # creating foreign keys, index, all the table objects

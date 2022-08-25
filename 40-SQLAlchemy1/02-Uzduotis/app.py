@@ -49,6 +49,7 @@ def delete(id):
 
 @app.route('/update/<int:id>', methods=['GET', 'POST'])
 def update(id):
+    print(id)
     game_review = VideoGames.query.get_or_404(id)
     if request.method == 'POST':
         if request.form['name'] != "":

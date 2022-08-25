@@ -10,11 +10,11 @@ while True:
     if pasirinkimas == 1:
         while True:
             try:
-                name = input("Įveskite vardą")
-                last_name = input("Įveskite pavardę")
-                birthdate = datetime.strptime(input("Įveskite gimimo datą (YYYY-MM-DD)"), "%Y-%m-%d")
-                position = input("Įveskite pareigas")
-                salary = float(input("Įveskite atlyginimą"))
+                name = input("Įveskite vardą: ")
+                last_name = input("Įveskite pavardę: ")
+                birthdate = datetime.strptime(input("Įveskite gimimo datą (YYYY-MM-DD): "), "%Y-%m-%d")
+                position = input("Įveskite pareigas: ")
+                salary = float(input("Įveskite atlyginimą: "))
                 darbuotojas = Darbuotojas(name, last_name, birthdate, position, salary)
                 session.add(darbuotojas)
                 session.commit()
@@ -25,7 +25,7 @@ while True:
         visi = session.query(Darbuotojas).all()
         for darbuotojas in visi:
             print(darbuotojas)
-        numeris = int(input("Pasirinkite norimo ištrinti įrašo ID"))
+        numeris = int(input("Pasirinkite norimo ištrinti įrašo ID: "))
         trinamas_darbuotojas = session.query(Darbuotojas).get(numeris)
         session.delete(trinamas_darbuotojas)
         session.commit()
@@ -33,15 +33,15 @@ while True:
         visi = session.query(Darbuotojas).all()
         for darbuotojas in visi:
             print(darbuotojas)
-        numeris = int(input("Pasirinkite norimo redaguoti įrašo ID"))
+        numeris = int(input("Pasirinkite norimo redaguoti įrašo ID: "))
         darbuotojas = session.query(Darbuotojas).get(numeris)
         while True:
             try:
-                darbuotojas.name = input("Įveskite vardą")
-                darbuotojas.last_name = input("Įveskite pavardę")
-                darbuotojas.birthdate = datetime.strptime(input("Įveskite gimimo datą (YYYY-MM-DD)"), "%Y-%m-%d")
-                darbuotojas.position = input("Įveskite pareigas")
-                darbuotojas.salary = float(input("Įveskite atlyginimą"))
+                darbuotojas.name = input("Įveskite vardą: ")
+                darbuotojas.last_name = input("Įveskite pavardę: ")
+                darbuotojas.birthdate = datetime.strptime(input("Įveskite gimimo datą (YYYY-MM-DD): "), "%Y-%m-%d")
+                darbuotojas.position = input("Įveskite pareigas: ")
+                darbuotojas.salary = float(input("Įveskite atlyginimą; "))
                 session.commit()
                 break
             except:
