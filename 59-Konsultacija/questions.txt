@@ -1,0 +1,2 @@
+https://stackoverflow.com/questions/213845/javascript-removing-whitespace-when-it-shouldnt
+
