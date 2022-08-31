@@ -1,4 +1,5 @@
 // Variables
+// Senesnis failas, naudoja function declaration (which is OK) ir var (which is bad)
 var inputText = document.getElementById('input-text');
 var filterText = document.getElementById('filter-text');
 var addBtn = document.getElementById('add');
