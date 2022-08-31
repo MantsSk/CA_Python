@@ -13,6 +13,7 @@ const todoPopulate = text => {
 	// Creating a new list element
 	let newListEl = document.createElement('li');
 	newListEl.classList.add('list-item');
+	// not a great practice, would be better to create and append elements, but leaving this for demonstration purposes
 	newListEl.innerHTML = '<div class="text">'+text+'</div><button class="remove">'+removeSVG+'</button>';
 
 	// Prepending the list item into the <ul>

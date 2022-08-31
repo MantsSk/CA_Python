@@ -62,7 +62,7 @@ header h1 {
 }
 
 .filter-container {
-	position: relative;
+	/* position: relative; */
 	margin: 100px auto;
 	width: 83%;
 	max-width: 850px;
