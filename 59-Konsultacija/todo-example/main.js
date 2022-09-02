@@ -1,5 +1,4 @@
 // Variables
-// Senesnis failas, naudoja function declaration (which is OK) ir var (which is bad)
 var inputText = document.getElementById('input-text');
 var filterText = document.getElementById('filter-text');
 var addBtn = document.getElementById('add');
@@ -33,7 +32,7 @@ function todoPopulate(text) {
 
 		// get the index of the clicked TODO element
 
-		while (child.previousSibling != null)  {
+		while (child.previousElementSibling != null)  {
 			todo_index++;
 			child = child.previousSibling;
 		}	
@@ -64,7 +63,9 @@ function addToMemory(text) {
 }
 
 function removeFromMemory(index) {
+	console.log(index)
 	memoryList.splice(index, 1)
+	console.log(memoryList)
 	localStorage.setItem("list", memoryList);
 
 	// If elements are inserted other way around in DOM, we might need to reverse the list for deletion, see line 20

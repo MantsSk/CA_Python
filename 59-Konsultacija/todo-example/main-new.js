@@ -34,7 +34,7 @@ const todoPopulate = text => {
 
 		// get the index of the clicked TODO element
 
-		while (child.previousSibling != null)  {
+		while (child.previousElementSibling != null)  {
 			todo_index++;
 			child = child.previousSibling;
 		}	
@@ -65,8 +65,11 @@ const addToMemory = text => {
 }
 
 const removeFromMemory = index => {
+	console.log(index)
+	console.log(memoryList)
 	memoryList.splice(index, 1)
 	localStorage.setItem("list", memoryList);
+	console.log(memoryList)
 
 	// If elements are inserted other way around in DOM, we might need to reverse the list for deletion, see line 20
 	// memoryList.reverse().splice(index, 1);
@@ -76,17 +79,12 @@ const removeFromMemory = index => {
 // If there are elements inside memory, put them into the memoryList array
 
 // Loading list elements from existing memory
-if (memoryList.length) {
-	for (memo of memoryList) {
-		todoPopulate(memo);
-	}
-}
-
-// Clicking the '+' button or hitting the enter key runs the todoPopulate() and addToMemory() functions if there is any text inside the input
 
 if (localStorage.getItem('list')) {
 	memoryList = localStorage.getItem('list').split(',');
 }
+
+// Clicking the '+' button or hitting the enter key runs the todoPopulate() and addToMemory() functions if there is any text inside the input
 
 // Loading list elements from existing memory
 if (memoryList.length) {
