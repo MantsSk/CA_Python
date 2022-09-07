@@ -8,6 +8,10 @@
             <hr>
             <p>{{ straipsnis['tekstas'] }}</p>
             <br><br>
+        {% set kint = "rado" %}
         {% endif %}
     {% endfor %}
+    {% if kint != "rado" %}
+        {% include 404.html %}
+    {% else %}
 {% endblock %}
