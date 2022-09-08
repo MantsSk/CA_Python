@@ -1,7 +1,8 @@
 from app import db, app
 
 with app.app_context():
-    db.create_all() # sukurs mūsų lentelę DB
+    db.create_all()
+
 
 # Iš karto inicijuosime testams keletą įrašų:
 # jonas = Query('Jonas', 'jonas@mail.com', 'Kažkoks labai rimtas atsiliepimas.')
@@ -18,8 +19,3 @@ with app.app_context():
 # print(antanas.id)
 # print(bronius.id)
 # print(juozas.id)
-
-# 1
-# 2
-# 4
-# 3
