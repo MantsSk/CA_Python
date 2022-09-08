@@ -2,6 +2,7 @@ from flask import Flask, redirect, render_template, request, flash
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from form import TaskForm, UpdateForm
+from flask_migrate import Migrate
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
@@ -17,9 +18,11 @@ db = SQLAlchemy(app)
 class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(200), nullable=False)
+    priority = db.Column(db.String(200))
     date_created = db.Column(db.DateTime)
 
 db.create_all()
+migrate = Migrate(app, db)
 
 @app.route('/', methods=['POST', 'GET'])
 def index():

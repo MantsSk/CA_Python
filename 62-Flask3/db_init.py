@@ -1,4 +1,6 @@
-from app import db, Query
+from app import db
+from sqlalchemy.orm import Query
+
 
 db.create_all()  # sukurs mūsų lentelę DB
 
