@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if visi_irasai %}
+{% for irasas in visi_irasai %}
+<hr>
+{% if irasas.pajamos %}
+<p>Pajamos: {{irasas.suma}}</p>
+<p>Data: {{ datetime.strftime(irasas.data, "%Y-%m-%d %H:%M:%S")}}</p>
+{% else %}
+<p>Išlaidos: {{irasas.suma}}</p>
+<p>Data: {{irasas.data}}</p>
+{% endif %}
+<a href="{{ url_for('delete', id=irasas['id']) }}">Ištrinti</a>
+<a href="{{ url_for('update', id=irasas['id']) }}">Redaguoti</a>
+
+{% endfor %}
+{% endif %}
+<hr>
+<p><a href="{{ url_for('new_record')}}">Naujas įrašas</a></p>
+
+{% endblock %}

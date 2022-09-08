@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class = "content"> 
+    <div class="input-container">
+        <form action="#" method="POST">
+            {{ form.hidden_tag() }}
+            {{ form.name(value=task.content)}}
+            {{ form.submit }}
+        </form>
+</div>
+{% endblock %}
