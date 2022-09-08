@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template, request, flash
+from flask import Flask, redirect, render_template, url_for, request, flash
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from form import TaskForm, UpdateForm
@@ -33,7 +33,7 @@ def index():
         try: 
             db.session.add(new_task)
             db.session.commit()
-            return redirect('/')
+            return redirect(url_for('index'))
         except Exception as ex:
             return ex
     else:  
@@ -46,7 +46,7 @@ def delete(id):
     try: 
         db.session.delete(task_to_delete)
         db.session.commit()
-        return redirect('/')
+        return redirect(url_for('index'))
     except Exception as ex:
         return ex
 
@@ -59,7 +59,7 @@ def update(id):
         task.date_created = datetime.now().replace(microsecond=0)
         try: 
             db.session.commit()
-            return redirect('/')
+            return redirect(url_for('index'))
         except Exception as ex:
             return ex
     else: 

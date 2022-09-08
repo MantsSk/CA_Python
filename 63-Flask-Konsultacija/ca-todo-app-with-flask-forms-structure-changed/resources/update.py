@@ -1,4 +1,4 @@
-from flask import render_template, redirect
+from flask import render_template, redirect, url_for
 from flask.views import View
 from form import UpdateForm
 from db import db
@@ -17,7 +17,7 @@ class UpdateView(View):
             task.date_created = datetime.now().replace(microsecond=0)
             try: 
                 db.session.commit()
-                return redirect('/')
+                return redirect(url_for('index-view'))
             except Exception as ex:
                 return ex
         else: 
