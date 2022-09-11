@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if visi_vaikai %}
+{% for vaikas in visi_vaikai %}
+<hr>
+<p><strong>Vardas:</strong> {{vaikas.vardas}}</p>
+<p><strong>Pavardė:</strong> {{vaikas.pavarde}}</p>
+{% if vaikas.tevas %}
+<p><strong>Tėvas/motina:</strong></p>
+<p>{{vaikas.tevas.vardas}} {{vaikas.tevas.pavarde}}</p>
+{% endif %}
+
+{% endfor %}
+{% endif %}
+<hr>
+<p><a href="{{ url_for('new_child')}}">Naujas vaikas</a></p>
+
+{% endblock %}

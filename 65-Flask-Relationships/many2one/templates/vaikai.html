@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if visi_vaikai %}
+{% for vaikas in visi_vaikai %}
+<hr>
+<p>{{vaikas.vardas}}</p>
+<p>{{vaikas.pavarde}}</p>
+{% if vaikas.tevai %}
+<p>Vaikai:</p>
+{% for tevas in vaikas.tevai %}
+<p>{{tevas.vardas}} {{tevas.pavarde}}</p>
+{% endfor %}
+{% endif %}
+
+{% endfor %}
+{% endif %}
+<hr>
+<p><a href="{{ url_for('new_child')}}">Naujas vaikas</a></p>
+
+{% endblock %}
