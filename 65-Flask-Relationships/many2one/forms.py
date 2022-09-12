@@ -8,13 +8,13 @@ def vaikas_query():
     return app.Vaikas.query
 
 class TevasForm(FlaskForm):
-    vardas = StringField('Numeris', [DataRequired()])
+    vardas = StringField('Vardas', [DataRequired()])
     pavarde = StringField('Pavardė', [DataRequired()])
-    vaikas = QuerySelectField(query_factory=vaikas_query, allow_blank=True, get_label="vardas", get_pk=lambda obj: str(obj))
+    vaikas = QuerySelectField(query_factory=vaikas_query, allow_blank=True, get_label="vardas")
     submit = SubmitField('Įvesti')
 
 
 class VaikasForm(FlaskForm):
-    vardas = StringField('Numeris', [DataRequired()])
+    vardas = StringField('Vardas', [DataRequired()])
     pavarde = StringField('Pavardė', [DataRequired()])
     submit = SubmitField('Įvesti')

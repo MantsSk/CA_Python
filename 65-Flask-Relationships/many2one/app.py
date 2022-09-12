@@ -20,7 +20,7 @@ class Tevas(db.Model):
     vardas = db.Column("Vardas", db.String)
     pavarde = db.Column("Pavardė", db.String)
     vaikas_id = db.Column(db.Integer, db.ForeignKey("vaikas.id"))
-    vaikas = db.relationship("Vaikas", cascade="all, delete", passive_deletes=True)
+    vaikas = db.relationship("Vaikas", back_populates="tevai")
 
 
 class Vaikas(db.Model):
@@ -28,7 +28,7 @@ class Vaikas(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     vardas = db.Column("Vardas", db.String)
     pavarde = db.Column("Pavardė", db.String)
-    tevai = db.relationship("Tevas")
+    tevai = db.relationship("Tevas", back_populates="vaikas")
 
 @app.route("/")
 def home():
