@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form method="post" action="#">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        {{ form.vardas.label(class="form-control-label") }}
+        {{ form.vardas(class="form-control", value=zmogus.vardas) }}
+    </div>
+    <div class="form-group">
+        {{ form.pavarde.label(class="form-control-label") }}
+        {{ form.pavarde(class="form-control", value=zmogus.pavarde) }}
+    </div>
+    <div class="form-group">
+        {{ form.asmens_kodas.label(class="form-control-label") }}
+        {{ form.asmens_kodas(class="form-control", value=zmogus.asmens_kodas) }}
+    </div>
+    <div class="form-group">
+        {{ form.tel_numeris.label(class="form-control-label") }}
+        {{ form.tel_numeris(class="form-control", value=zmogus.tel_numeris) }}
+    </div>
+    {{ form.submit }}
+</form>
+{% endblock %}]

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form method="post" action="#">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        {{ form.numeris.label(class="form-control-label") }}
+        {{ form.numeris(class="form-control", value=saskaita.numeris) }}
+    </div>
+    <div class="form-group">
+        {{ form.zmogus.label(class="form-control-label") }}
+        {{ form.zmogus(class="form-control", value=saskaita.zmogus) }}
+    </div>
+    <div class="form-group">
+        {{ form.bankas.label(class="form-control-label") }}
+        {{ form.bankas(class="form-control", value=saskaita.bankas) }}
+    </div>
+    <div class="form-group">
+        {{ form.balansas.label(class="form-control-label") }}
+        {{ form.balansas(class="form-control", value=saskaita.balansas) }}
+    </div>
+    {{ form.submit }}
+</form>
+{% endblock %}]

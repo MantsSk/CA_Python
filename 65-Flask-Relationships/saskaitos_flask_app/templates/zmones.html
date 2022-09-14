@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if visi_zmones %}
+{% for zmogus in visi_zmones %}
+<hr>
+<p>{{zmogus.vardas}} {{zmogus.pavarde}}</p>
+<p>Asmens kodas: {{zmogus.asmens_kodas}}</p>
+<p>Tel. numeris: {{zmogus.tel_numeris}}</p>
+<a href="{{ url_for('zmogus_delete', id=zmogus['id']) }}">Ištrinti</a>
+<a href="{{ url_for('zmogus_update', id=zmogus['id']) }}">Redaguoti</a>
+{% endfor %}
+{% endif %}
+<hr>
+<p><a href="{{ url_for('zmogus_new')}}">Naujas žmogus</a></p>
+
+{% endblock %}
