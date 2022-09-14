@@ -59,7 +59,10 @@ def new_parent():
     db.create_all()
     forma = forms.TevasForm()
     if forma.validate_on_submit():
-        naujas_tevas = Tevas(vardas=forma.vardas.data, pavarde=forma.pavarde.data, vaikas_id=forma.vaikas.data.id)
+        if forma.vaikas.data: 
+            naujas_tevas = Tevas(vardas=forma.vardas.data, pavarde=forma.pavarde.data, vaikas_id=forma.vaikas.data.id)
+        else:
+            naujas_tevas = Tevas(vardas=forma.vardas.data, pavarde=forma.pavarde.data)
         db.session.add(naujas_tevas)
         db.session.commit()
         return redirect(url_for('parents'))
