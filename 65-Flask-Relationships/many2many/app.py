@@ -40,17 +40,17 @@ class Vaikas(db.Model):
     tevai = db.relationship("Tevas", secondary=association_table,
                          back_populates="vaikai")
 
-# class TevasForm(FlaskForm):
-#     vardas = StringField('Vardas', [DataRequired()])
-#     pavarde = StringField('Pavardė', [DataRequired()])
-#     vaikai = QuerySelectMultipleField(query_factory=Vaikas.query.all, get_label="vardas")
-#     submit = SubmitField('Įvesti')
+class TevasForm(FlaskForm):
+    vardas = StringField('Vardas', [DataRequired()])
+    pavarde = StringField('Pavardė', [DataRequired()])
+    vaikai = QuerySelectMultipleField(query_factory=Vaikas.query.all, get_label="vardas")
+    submit = SubmitField('Įvesti')
 
-# class VaikasForm(FlaskForm):
-#     vardas = StringField('Vardas', [DataRequired()])
-#     pavarde = StringField('Pavardė', [DataRequired()])
-#     tevai = QuerySelectMultipleField(query_factory=Tevas.query.all, get_label="vardas")
-#     submit = SubmitField('Įvesti')
+class VaikasForm(FlaskForm):
+    vardas = StringField('Vardas', [DataRequired()])
+    pavarde = StringField('Pavardė', [DataRequired()])
+    tevai = QuerySelectMultipleField(query_factory=Tevas.query.all, get_label="vardas")
+    submit = SubmitField('Įvesti')
 
 @app.route("/")
 def index():
