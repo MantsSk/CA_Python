@@ -19,6 +19,11 @@
     <div class="form-group">
         {{ form.swift.label(class="form-control-label") }}
         {{ form.swift(class="form-control") }}
+        {% if form.swift.errors %}
+        {% for error in form.body.errors %}
+          <small><font color="red">{{ error }}</font></small>
+        {% endfor %}
+      {% endif %}
     </div>
     {{ form.submit }}
 </form>

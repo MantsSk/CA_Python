@@ -4,9 +4,9 @@ in visi_tevai %}
 <p>{{tevas.vardas}}</p>
 <p>{{tevas.pavarde}}</p>
 {% if tevas.vaikai %}
-<p>Vaikai:</p>
+<p><strong>Vaikai:</strong></p>
 {% for vaikas in tevas.vaikai %}
-<p>{{vaikas.vardas}} {{vaikas.pavarde}}</p>
+<p><span style="color:red">{{vaikas.vardas}} {{vaikas.pavarde}}</span></p>
 {% endfor %} {% endif %} {% endfor %} {% endif %}
 <hr />
 <p><a href="{{ url_for('new_parent')}}">Naujas tėvas</a></p>
