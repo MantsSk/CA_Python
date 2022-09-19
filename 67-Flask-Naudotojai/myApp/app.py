@@ -2,14 +2,15 @@ import os
 
 import requests
 from flask import Flask, render_template, request, flash, url_for
-from flask_login import LoginManager, current_user
-from werkzeug.security import generate_password_hash
+from flask_login import LoginManager, current_user, login_user, logout_user
+from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import redirect
 
 from db import db
 from models.User import User
 from scr.articles import articles
 from scr.forms.article_form import ArticleForm
+from scr.forms.login_form import LoginForm
 from scr.forms.registration_form import RegistrationForm
 
 app = Flask(__name__)
@@ -91,6 +92,28 @@ def register():
         flash('Sėkmingai prisiregistravote! Galite prisijungti', 'success')
         return redirect(url_for('index'))
     return render_template('registration.html', title='Register', form=form)
+
+
+@app.route("/login", methods=['GET', 'POST'])
+def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data).first()
+        if user and check_password_hash(user.password, form.password.data):
+            login_user(user, remember=form.remember_me.data)
+            next_page = request.args.get('next')
+            return redirect(next_page) if next_page else redirect(url_for('index'))
+        else:
+            flash('Prisijungti nepavyko. Patikrinkite el. paštą ir slaptažodį', 'danger')
+    return render_template('login.html', title='Prisijungti', form=form)
+
+
+@app.route("/logout")
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
 
 
 if __name__ == '__main__':
