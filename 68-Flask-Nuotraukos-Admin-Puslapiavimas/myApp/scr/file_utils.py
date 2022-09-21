@@ -12,7 +12,7 @@ def save_picture(root_path, form_picture) -> str:
     picture = _resize_picture(form_picture)
     picture.save(picture_path)
 
-    return picture_path
+    return str(picture_path.name)
 
 
 def _rename_picture(original_name: str) -> str:

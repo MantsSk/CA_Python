@@ -14,7 +14,7 @@ class ProfileForm(FlaskForm):
     submit = SubmitField('Atnaujinti')
 
     def validate_name(self, name):
-        if name.data != current_user.name:
+        if name.data != current_user.username:
             user = User.query.filter_by(name=name.data).first()
             if user:
                 raise ValidationError('Šis name panaudotas. Pasirinkite kitą.')

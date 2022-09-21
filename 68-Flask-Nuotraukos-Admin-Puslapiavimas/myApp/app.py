@@ -5,6 +5,8 @@ from flask_login import LoginManager, current_user, login_user, logout_user, log
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import redirect
 
+from flask_admin import Admin
+from flask_admin.contrib.sqla import ModelView
 from db import db
 from models.User import User
 from scr.articles import articles
@@ -31,9 +33,16 @@ login_manager.unauthorized_callback = lambda: render_template("404.html")
 def load_user(user_id):
     return User.query.get(int(user_id))
 
+class ManoModelView(ModelView):
+    def is_accessible(self):
+        return current_user.is_authenticated and current_user.username == "My_name"
+
+admin = Admin(app)
+admin.add_view(ManoModelView(User, db.session))
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    db.create_all()
     if request.method == 'POST':
         date = request.form['date']
         autorius = request.form['autorius']
@@ -81,7 +90,6 @@ def flash_messages():  # kintam1jį būtinai nurodykite ir funkcijos parametruos
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    db.create_all()
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     form = RegistrationForm()
@@ -112,21 +120,21 @@ def login():
     return render_template('login.html', title='Prisijungti', form=form)
 
 
-@login_required
 @app.route("/profile", methods=['GET', 'POST'])
+@login_required
 def profile():
     form = ProfileForm()
     if form.validate_on_submit():
         if form.avatar.data:
             avatar = save_picture(app.root_path, form.avatar.data)
             current_user.avatar = avatar
-        current_user.name = form.name.data
+        current_user.username = form.name.data
         current_user.email = form.email.data
         db.session.commit()
         flash('Tavo paskyra atnaujinta!', 'success')
-        return redirect(url_for('paskyra'))
+        return redirect(url_for('profile'))
     elif request.method == 'GET':
-        form.name.data = current_user.name
+        form.name.data = current_user.username
         form.email.data = current_user.email
     avatar = url_for('static', filename='avatars/' + current_user.avatar)
     return render_template('profile.html', title='Account', form=form, avatar=avatar)
@@ -136,6 +144,7 @@ def profile():
 def logout():
     logout_user()
     return redirect(url_for('index'))
+
 
 
 if __name__ == '__main__':
