@@ -11,3 +11,8 @@ class RequestResetForm(FlaskForm):
         user = User.query.filter_by(email=email.data).first()
         if user is None:
             raise ValidationError('Nėra paskyros, registruotos šiuo el. pašto adresu. Registruokitės.')
+
+class PasswordResetForm(FlaskForm):
+    password = PasswordField('Slaptažodis', validators=[DataRequired()])
+    confirm_password = PasswordField('Pakartokite slaptažodį', validators=[DataRequired(), EqualTo('password')])
+    submit = SubmitField('Atnaujinti Slaptažodį')

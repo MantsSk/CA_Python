@@ -15,10 +15,9 @@ from scr.forms.article_form import ArticleForm
 from scr.forms.login_form import LoginForm
 from scr.forms.profile_form import ProfileForm
 from scr.forms.registration_form import RegistrationForm
-from scr.forms.request_reset_form import RequestResetForm
+from scr.forms.request_reset_form import RequestResetForm, PasswordResetForm
 from flask_mail import Message, Mail
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
-from flask_bcrypt import Bcrypt
 
 
 app = Flask(__name__)
@@ -29,8 +28,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'da
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = "login@gmail.com"
-app.config['MAIL_PASSWORD'] = "psw"
+app.config['MAIL_USERNAME'] = "codeacadtest1@gmail.com"
+app.config['MAIL_PASSWORD'] = "mdwovadczmalwvtd"
 
 db.init_app(app)
 
@@ -49,6 +48,15 @@ def load_user(user_id):
 def get_reset_token(user, expires_sec=1800):
     s = Serializer(app.config['SECRET_KEY'], expires_sec)
     return s.dumps({'user_id': user.id}).decode('utf-8')
+
+@staticmethod
+def verify_reset_token(token):
+    s = Serializer(app.config['SECRET_KEY'])
+    try:
+        user_id = s.loads(token)['user_id']
+    except:
+        return None
+    return User.query.get(user_id)
 
 def send_reset_email(user):
     token = get_reset_token(user)
@@ -180,30 +188,31 @@ def reset_request():
         user = User.query.filter_by(email=form.email.data).first()
         send_reset_email(user)
         flash('Jums išsiųstas el. laiškas su slaptažodžio atnaujinimo instrukcijomis.', 'info')
-        return redirect(url_for('prisijungti'))
+        return redirect(url_for('login'))
     return render_template('reset_request.html', title='Reset Password', form=form)
 
 @app.route("/reset_password/<token>", methods=['GET', 'POST'])
 def reset_token(token):
     if current_user.is_authenticated:
         return redirect(url_for('home'))
-    user = User.verify_reset_token(token)
+    user = verify_reset_token(token)
     if user is None:
         flash('Užklausa netinkama arba pasibaigusio galiojimo', 'warning')
         return redirect(url_for('reset_request'))
-    form = RequestResetForm
+    form = PasswordResetForm()
     if form.validate_on_submit():
-        hashed_password = bcrypt.generate_password_hash(form.slaptazodis.data).decode('utf-8')
-        user.slaptazodis = hashed_password
+        hashed_password = generate_password_hash(form.password.data)
+        user.password = hashed_password
         db.session.commit()
         flash('Tavo slaptažodis buvo atnaujintas! Gali prisijungti', 'success')
-        return redirect(url_for('prisijungti'))
+        return redirect(url_for('login'))
     return render_template('reset_token.html', title='Reset Password', form=form)
 
 @app.route("/logout")
 def logout():
     logout_user()
     return redirect(url_for('index'))
+    
 
 
 
