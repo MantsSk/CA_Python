@@ -29,7 +29,7 @@ app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USERNAME'] = "codeacadtest1@gmail.com"
-app.config['MAIL_PASSWORD'] = "mdwovadczmalwvtd"
+app.config['MAIL_PASSWORD'] = "psw"
 
 db.init_app(app)
 
