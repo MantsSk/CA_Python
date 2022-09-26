@@ -18,6 +18,7 @@ from scr.forms.registration_form import RegistrationForm
 from scr.forms.request_reset_form import RequestResetForm, PasswordResetForm
 from flask_mail import Message, Mail
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+from password import password 
 
 
 app = Flask(__name__)
@@ -29,7 +30,7 @@ app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USERNAME'] = "codeacadtest1@gmail.com"
-app.config['MAIL_PASSWORD'] = "psw"
+app.config['MAIL_PASSWORD'] = password
 
 db.init_app(app)
 
