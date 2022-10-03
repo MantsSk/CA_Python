@@ -13,10 +13,10 @@ app.config['SECRET_KEY'] = '4654f5dfadsrfasdr54e6rae'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'biudzetas.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
-db.create_all()
 
 from biudzetas.models import Vartotojas, Irasas
 
+db.create_all()
 bcrypt = Bcrypt(app)
 mail = Mail(app)
 login_manager = LoginManager(app)
