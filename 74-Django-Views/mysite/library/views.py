@@ -1,9 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 
 from django.http import HttpResponse
 
 from django.shortcuts import render
+from django.urls import reverse
 from django.http import HttpResponse
+from django.views import generic
 from .models import Book, Author, BookInstance, Genre
 
 def index(request):
@@ -28,3 +30,30 @@ def index(request):
 
     # renderiname index.html, su duomenimis kintamąjame context
     return render(request, 'index.html', context=context)
+
+def authors(request):
+    authors = Author.objects.all()
+
+    context = {
+        'ne_autoriai': authors
+    }
+
+    return render(request, 'authors.html', context)
+
+
+def author(request, author_id):
+    single_author = get_object_or_404(Author, pk=author_id)
+
+    context = {
+        'author': single_author
+    }
+    return render(request, 'author.html', context)
+
+class BookListView(generic.ListView):
+    model = Book
+    template_name = "book_list.html"
+
+class BookDetailView(generic.DetailView):
+    model = Book
+    template_name = "book_detail.html"
+

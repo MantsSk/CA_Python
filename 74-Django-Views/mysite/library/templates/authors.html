@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Autoriai</h1>
+  <p>Mūsų knygų autorių sąrašas.</p>
+  {% for a in ne_autoriai %}
+    <li>{{a.first_name}} {{a.last_name}}</li>
+    {% endfor %}
+{% endblock %}
