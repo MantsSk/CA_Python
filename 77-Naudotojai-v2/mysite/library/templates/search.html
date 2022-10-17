@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Paieškos pagal "{{query}}" rezultatai:</h1>
+</br>
+{% if books %}
+<h3>Knygos</h3>
+<ul>
+    {% for book in books %}
+    <li>
+        <a href="{{ book.id }}">{{ book.title }}</a> ({{book.author}})
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% if authors %}
+<h3>Autoriai</h3>
+<ul>
+    {% for author in authors%}
+    <li>
+        <a href="{{ author.id }}">{{ author.first_name }} {{ author.last_name }}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% if book_instances%}
+<h3>Knygu egzemplioriai</h3>
+<ul>
+    {% for instance in book_instances %}
+    <li>
+        <a href="{{ instance.id }}">{{ instance.book.title }} {{ instance.id }}, statusas: <b>{{ instance.status }}</b> </a>
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% if not books and not authors %}
+<p>Oops. Nieko neradome :(</p>
+{% endif %}
+
+{% endblock %}
