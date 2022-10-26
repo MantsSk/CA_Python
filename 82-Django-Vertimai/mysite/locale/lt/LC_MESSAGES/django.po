@@ -50,7 +50,7 @@ msgstr "Sveiki atvyke"
 
 #: library/templates/index.html:6
 msgid "Today we have:"
-msgstr ""
+msgstr "Siandien turime"
 
 #: library/templates/index.html:8
 msgid "Books"
@@ -79,7 +79,7 @@ msgstr ""
 
 #: mysite/settings.py:177
 msgid "English"
-msgstr ""
+msgstr "Anglu"
 
 #: mysite/settings.py:178
 msgid "Lithuanian"
