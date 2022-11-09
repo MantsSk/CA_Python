@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+  <div class="col-md-4">
+      <h1>{{ game.title }}</h1>
+
+      {% if game.cover %}
+        <img src="{{ game.cover.url }}" class="card-img-top" alt="...">
+      {% else %}
+        <img src="{% static 'img/no-image.png' %}" class="card-img-top">
+      {% endif %}
+    
+    <p><strong>Publisher:</strong> <a href="{% url 'publisher' game.publisher.pk %}">{{ game.publisher }}</a></p>
+    <p><strong>Genre:</strong> {{ game.genre.all|join:", " }}</p>  
+    <p><strong>Description:</strong> {{ game.summary }}</p>
+  </br>
+  
+  <h4>Reviews:</h4>
+  {% if game.gamereview_set.all %}
+    {% for review in game.gamereview_set.all %} 
+      <hr> 
+      <strong>{{ review.reviewer }}</strong>, <em>{{ review.date_created}}</em>
+      <p>{{ review.content }}</p>
+      <h5>{{ review.rating }} / 100</h5>
+    {% endfor %}
+  {% else %}
+    <p>Game doesn't have reviews</p>
+  {% endif %}
+  </br>
+  <hr> 
+  {% if user.is_authenticated %}
+    <form action="" method="post">
+      {% csrf_token %}
+      {{ form }}
+      <input type="submit" value="Išsaugoti">
+    </form>
+  {% endif %}
+  </div>
+{% endblock %}

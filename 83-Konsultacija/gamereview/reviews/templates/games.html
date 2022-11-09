@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+  <div class="container author">
+    </br>
+    <h5>We have reviewed games:</h5>
+    {% if game_list %}
+    <div class="row">
+      {% for game in game_list %}
+        <div class="col-md-4 d-flex align-items-stretch">
+          <div class="card mb-4 shadow-sm">
+            {% if game.cover %}
+              <img src="{{ game.cover.url }}" class="card-img-top" alt="...">
+            {% else %}
+              <img src="{% static 'img/no-image.png' %}" class="card-img-top">
+            {% endif %}
+            <div class="card-body">
+              <h6 class="card-subtitle mb-2 text-muted">{{ game.publisher }}</h6>
+              <p class="card-text"><a href="{% url 'game' game.id %}">{{game.title}} </a></p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    {% endif %}
+    </div> 
+  </div>
+{% endblock %}

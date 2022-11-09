@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container author">
+    <h4>{{ publisher.name }}</h4>
+    <hr/>
+    </hr>
+    </br>
+    <h5>We have reviewed these publisher {{ publisher.name }} games:</h5>
+    {% for game in publisher.games.all %}
+       <li><a href="{% url 'game' game.id %}">{{ game.title }}</a></li> 
+    {% endfor %}
+    </div>
+{% endblock %}

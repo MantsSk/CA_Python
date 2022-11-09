@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% block content %}
+<html>
+<head></head>
+
+<body>
+    <h1>{% trans "Welcome to game reviews" %}</h1>
+    {% if review %}
+    <h4>{% trans "Latest review:" %} {{review.game.title}}</h4>
+        <div class="col-md-4 d-flex align-items-stretch">
+          <div class="card mb-4 shadow-sm">
+            {% if review.game.cover %}
+              <img src="{{ review.game.cover.url }}" class="card-img-top" alt="...">
+            {% else %}
+              <img src="{% static 'img/no-image.png' %}" class="card-img-top">
+            {% endif %}
+            <strong>{{ review.reviewer }}</strong>, <em>{{ review.date_created}}</em>
+            <p>{{ review.content }}</p>
+            <h5>{{ review.rating }} / 100</h5>
+        {% else %}
+          <p>There are no reviews</p>
+        {% endif %}
+          </div>
+        </div>   
+</body>
+
+</html>
+
+{% endblock content %}
