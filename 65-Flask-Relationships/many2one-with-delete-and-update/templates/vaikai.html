@@ -8,12 +8,13 @@
 <p>{{vaikas.vardas}}</p>
 <p>{{vaikas.pavarde}}</p>
 {% if vaikas.tevai %}
-<p>Vaikai:</p>
+<h3>Tevai:</h3>
 {% for tevas in vaikas.tevai %}
 <p>{{tevas.vardas}} {{tevas.pavarde}}</p>
 {% endfor %}
 {% endif %}
-
+<a href="{{ url_for('vaikas_delete', id=vaikas['id']) }}">Ištrinti</a>
+<a href="{{ url_for('vaikas_update', id=vaikas['id']) }}">Redaguoti</a>
 {% endfor %}
 {% endif %}
 <hr>
