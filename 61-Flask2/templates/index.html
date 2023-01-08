@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Posts</h1>
+    <a class='btn btn-primary' href="{{ url_for('add_article') }}">Rašyti straipsnį</a>
+    {% for post in posts %}
+        {% if post.status == 'published' %}
+            <h2>{{ post.title }}</h2>
+            <p>{{ post.date }}, {{ post.author }}</p>
+            <hr>
+            <p>{{ post.content | truncate(15) }} <a href="{{ url_for('article', title=post.title) }}">skaityti toliau</a></p>
+        {% endif %}
+    {% endfor %}
+{% endblock content %}
