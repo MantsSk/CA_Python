@@ -1,23 +1,40 @@
 import os
-
 from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate  # importuojame migracijas
 
-from db import db
-
 basedir = os.path.abspath(os.path.dirname(__file__))
+# pilnas kelias iki šio failo.
+
 app = Flask(__name__)
-db.init_app(app)
 
-from resources.about import AboutView
-from resources.index import IndexView
-app.add_url_rule('/', view_func=IndexView.as_view('index-view'))
-app.add_url_rule('/about', view_func=AboutView.as_view('about-view'))
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
+    os.path.join(basedir, 'data.sqlite')
+# nustatėme, kad mūsų duomenų bazė bus šalia šio failo esants data.sqlite failas
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'data.sqlite')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
+# sukuriame duomenų bazės objektą
+# sukurkime modelį užklausos formai, kuris sukurs duomenų bazėje lentelę
 
 Migrate(app, db)  # Susiejame app ir db.
 
-if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=8000, debug=True)
+
+class Message(db.Model):
+    # DB lentelei priskiria pavadinimą, jei nenurodysite, priskirs automatiškai pagal klasės pavadinimą.
+    __tablename__ = 'messages'
+    # stulpelis, kurio reikšmės integer. Taip pat jis bus primary_key.
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80), nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    # Papildome duomenų bazės modelį nauju stulpeliu.
+    phone = db.Column(db.String(40), unique=True)
+    message = db.Column(db.Text, nullable=False)
+
+    def __init__(self, name, email, message, phone):  # Inbuilt funkcija - Konstruktorius
+        self.name = name
+        self.email = email
+        self.message = message
+        self.phone = phone  # prie konstruktoriaus irgi nepamirštame pridėti:
+
+    def __repr__(self):  # Inbuilt funkcija - šios funkcijos grąžinama reikšmė naudojama spausdinant objektą (pavyzdžiui, spausdinant šios lentelės įrašą į konsolę)
+        return f'{self.name} - {self.email}'

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <h1>Submitted successfully!</h1>
+  <p>Name: {{ form.name.data }}</p>
+  <p>Email: {{ form.email.data }}</p>
+  <p>Content:</p>
+  <p>{{ form.content.data }}</p>
+
+{% endblock %}

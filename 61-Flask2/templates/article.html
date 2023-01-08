@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% for post in posts %}
+        {% if post.title == title %}
+            <h1>{{ post.title }}</h1>
+            <p>{{ post.date }}, {{ post.author }}</p>
+            <hr>
+            <p>{{ post.content}}</p>
+        {% endif %}
+    {% endfor %}
+{% endblock content %}
