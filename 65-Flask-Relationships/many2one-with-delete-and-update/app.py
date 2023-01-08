@@ -14,6 +14,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
     os.path.join(basedir, 'vaikaitevai.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+db.init_app(app)
 
 
 class Tevas(db.Model):
@@ -129,4 +130,5 @@ def vaikas_update(id):
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=8000, debug=True)
-    db.create_all()
+    with app.app_context():
+        db.create_all()
