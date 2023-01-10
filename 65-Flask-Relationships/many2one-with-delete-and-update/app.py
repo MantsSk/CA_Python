@@ -36,6 +36,7 @@ class Vaikas(db.Model):
 
 @app.route("/")
 def home():
+    db.create_all()
     return render_template("index.html")
 
 
@@ -59,7 +60,6 @@ def children():
 
 @app.route("/naujas_tevas", methods=["GET", "POST"])
 def new_parent():
-    db.create_all()
     forma = forms.TevasForm()
     if forma.validate_on_submit():
         if forma.vaikas.data:
@@ -97,7 +97,6 @@ def update(id):
 
 @app.route("/naujas_vaikas", methods=["GET", "POST"])
 def new_child():
-    db.create_all()
     forma = forms.VaikasForm()
     if forma.validate_on_submit():
         naujas_vaikas = Vaikas(vardas=forma.vardas.data,
@@ -130,5 +129,3 @@ def vaikas_update(id):
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=8000, debug=True)
-    with app.app_context():
-        db.create_all()

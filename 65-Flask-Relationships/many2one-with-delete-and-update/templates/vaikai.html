@@ -10,7 +10,7 @@
 {% if vaikas.tevai %}
 <h3>Tevai:</h3>
 {% for tevas in vaikas.tevai %}
-<p>{{tevas.vardas}} {{tevas.pavarde}}</p>
+<p style="color:red">{{tevas.vardas}} {{tevas.pavarde}}</p>
 {% endfor %}
 {% endif %}
 <a href="{{ url_for('vaikas_delete', id=vaikas['id']) }}">Ištrinti</a>
