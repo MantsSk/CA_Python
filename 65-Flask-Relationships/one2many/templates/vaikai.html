@@ -8,8 +8,8 @@
 <p><strong>Vardas:</strong> {{vaikas.vardas}}</p>
 <p><strong>Pavardė:</strong> {{vaikas.pavarde}}</p>
 {% if vaikas.tevas %}
-<p><strong>Tėvas/motina:</strong></p>
-<p><strong>{{vaikas.tevas.vardas}} {{vaikas.tevas.pavarde}}<strong></p>
+<h3>Tevas/Mama</h3>
+<p style="color:red">{{vaikas.tevas.vardas}} {{vaikas.tevas.pavarde}}<strong></p>
 {% endif %}
 
 {% endfor %}

@@ -6,14 +6,14 @@ import forms
 basedir = os.path.abspath(os.path.dirname(__file__))
 print(basedir)
 
+db = SQLAlchemy()
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = 'dfgsfdgsdfgsdfgsdf'
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir,
-#                                                                     'data.sqlite?check_same_thread=False')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'data.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
+    os.path.join(basedir, 'data.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
+db.init_app(app)
 
 
 class Tevas(db.Model):
@@ -31,6 +31,10 @@ class Vaikas(db.Model):
     pavarde = db.Column("Pavardė", db.String)
     tevas_id = db.Column(db.Integer, db.ForeignKey("tevas.id"))
     tevas = db.relationship("Tevas", back_populates="vaikai")
+
+
+with app.app_context():  # Reikia app konteksto, nes šis failas kitaip apie jį nežino ir neveikia
+    db.create_all()
 
 
 @app.route("/")
@@ -58,7 +62,6 @@ def children():
 
 @app.route("/naujas_tevas", methods=["GET", "POST"])
 def new_parent():
-    db.create_all()
     forma = forms.TevasForm()
     if forma.validate_on_submit():
         naujas_tevas = Tevas(vardas=forma.vardas.data,
@@ -74,7 +77,6 @@ def new_parent():
 
 @app.route("/naujas_vaikas", methods=["GET", "POST"])
 def new_child():
-    db.create_all()
     forma = forms.VaikasForm()
     if forma.validate_on_submit():
         naujas_vaikas = Vaikas(vardas=forma.vardas.data,
@@ -86,5 +88,4 @@ def new_child():
 
 
 if __name__ == '__main__':
-    db.create_all()
     app.run(host='127.0.0.1', port=8000, debug=True)

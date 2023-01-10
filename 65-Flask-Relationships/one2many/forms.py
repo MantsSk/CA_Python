@@ -2,25 +2,29 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, SubmitField, SelectField
 from wtforms.validators import DataRequired, Email, InputRequired
 from wtforms_sqlalchemy.fields import QuerySelectField, QuerySelectMultipleField
-import app
+from app import app, Vaikas, Tevas
 
-def get_pk(obj):
-    return str(obj)
 
-def vaikas_query():
-    return app.Vaikas.query
+def query_vaikai():
+    with app.app_context():
+        return Vaikas.query.all()
 
-def tevas_query():
-    return app.Tevas.query
+
+def query_tevas():
+    with app.app_context():
+        return Tevas.query.all()
+
 
 class TevasForm(FlaskForm):
     vardas = StringField('Vardas', [DataRequired()])
     pavarde = StringField('Pavardė', [DataRequired()])
-    vaikai = QuerySelectMultipleField(query_factory=vaikas_query, get_label="vardas")
+    vaikai = QuerySelectMultipleField(
+        query_factory=query_vaikai, get_label="vardas")
     submit = SubmitField('Įvesti')
+
 
 class VaikasForm(FlaskForm):
     vardas = StringField('Vardas', [DataRequired()])
     pavarde = StringField('Pavardė', [DataRequired()])
-    tevas = QuerySelectField(query_factory=tevas_query, get_label="vardas")
+    tevas = QuerySelectField(query_factory=query_tevas, get_label="vardas")
     submit = SubmitField('Įvesti')
