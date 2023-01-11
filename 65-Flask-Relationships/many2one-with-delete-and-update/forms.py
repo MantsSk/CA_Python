@@ -2,12 +2,12 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 from wtforms_sqlalchemy.fields import QuerySelectField
-from app import app
+from app import app, Tevas, Vaikas
 
 
 def query_vaikai():
     with app.app_context():
-        return app.Vaikas.query.all()
+        return Vaikas.query.all()
 
 
 class TevasForm(FlaskForm):

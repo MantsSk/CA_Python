@@ -4,6 +4,7 @@ from flask import Flask, render_template, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 import forms
 
+
 basedir = os.path.abspath(os.path.dirname(__file__))
 print(basedir)
 
@@ -73,6 +74,17 @@ def new_parent():
         return redirect(url_for('parents'))
     return render_template("prideti_teva.html", form=forma)
 
+@app.route("/naujas_vaikas", methods=["GET", "POST"])
+def new_child():
+    forma = forms.VaikasForm()
+    if forma.validate_on_submit():
+        naujas_vaikas = Vaikas(vardas=forma.vardas.data,
+                               pavarde=forma.pavarde.data)
+        db.session.add(naujas_vaikas)
+        db.session.commit()
+        return redirect(url_for('children'))
+    return render_template("prideti_vaika.html", form=forma)
+
 
 @app.route("/delete/<int:id>")
 def delete(id):
@@ -94,17 +106,6 @@ def update(id):
         return redirect(url_for('parents'))
     return render_template("update.html", form=form, tevas=tevas)
 
-
-@app.route("/naujas_vaikas", methods=["GET", "POST"])
-def new_child():
-    forma = forms.VaikasForm()
-    if forma.validate_on_submit():
-        naujas_vaikas = Vaikas(vardas=forma.vardas.data,
-                               pavarde=forma.pavarde.data)
-        db.session.add(naujas_vaikas)
-        db.session.commit()
-        return redirect(url_for('children'))
-    return render_template("prideti_vaika.html", form=forma)
 
 
 @app.route("/vaikas_delete/<int:id>")

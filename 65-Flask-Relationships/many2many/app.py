@@ -133,6 +133,50 @@ def new_child():
         return redirect(url_for('children'))
     return render_template("prideti_vaika.html", form=forma)
 
+@app.route("/delete/<int:id>")
+def delete_parent(id):
+    uzklausa = Tevas.query.get(id)
+    db.session.delete(uzklausa)
+    db.session.commit()
+    return redirect(url_for('parents'))
+
+
+@app.route("/update/<int:id>", methods=['GET', 'POST'])
+def update_parent(id):
+    forma = TevasForm()
+    tevas = Tevas.query.get(id)
+    if forma.validate_on_submit():
+        tevas.vardas = forma.vardas.data
+        tevas.pavarde = forma.pavarde.data
+        tevas.vaikai = []
+        for vaikas in forma.vaikai.data:
+            vaikas = Vaikas.query.get(vaikas.id)
+            tevas.vaikai.append(vaikas)
+        db.session.commit()
+        return redirect(url_for('parents'))
+    return render_template("update.html", form=forma, tevas=tevas)
+
+
+
+@app.route("/vaikas_delete/<int:id>")
+def vaikas_delete(id):
+    uzklausa = Vaikas.query.get(id)
+    db.session.delete(uzklausa)
+    db.session.commit()
+    return redirect(url_for('children'))
+
+
+@app.route("/vaikas_update/<int:id>", methods=['GET', 'POST'])
+def vaikas_update(id):
+    form = forms.VaikasForm()
+    vaikas = Vaikas.query.get(id)
+    if form.validate_on_submit():
+        vaikas.vardas = form.vardas.data
+        vaikas.pavarde = form.pavarde.data
+        db.session.commit()
+        return redirect(url_for('children'))
+    return render_template("update_vaikas.html", form=form, vaikas=vaikas)
+
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=8000, debug=True)
