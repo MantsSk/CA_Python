@@ -101,7 +101,12 @@ def update(id):
     if form.validate_on_submit():
         tevas.vardas = form.vardas.data
         tevas.pavarde = form.pavarde.data
-        tevas.vaikas_id = form.vaikas.data.id
+        if form.vaikas.data:
+            print("pirmas")
+            tevas.vaikas_id = form.vaikas.data.id
+        else: 
+            print("antras")
+            tevas.vaikas_id = None
         db.session.commit()
         return redirect(url_for('parents'))
     return render_template("update.html", form=form, tevas=tevas)
