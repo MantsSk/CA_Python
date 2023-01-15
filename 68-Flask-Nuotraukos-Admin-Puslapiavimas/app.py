@@ -51,7 +51,7 @@ with app.app_context():
 
 class ManoModelView(ModelView):
     def is_accessible(self):
-        return current_user.is_authenticated and current_user.el_pastas == "el@pastas.lt"
+        return current_user.is_authenticated and current_user.el_pastas == "mantas.skara@gmail.com"
 
 
 admin = Admin(app)
@@ -133,9 +133,8 @@ def account():
         db.session.commit()
         flash('Tavo paskyra atnaujinta!', 'success')
         return redirect(url_for('paskyra'))
-    elif request.method == 'GET':
-        form.vardas.data = current_user.vardas
-        form.el_pastas.data = current_user.el_pastas
+    form.vardas.data = current_user.vardas
+    form.el_pastas.data = current_user.el_pastas
     nuotrauka = url_for(
         'static', filename='profilio_nuotraukos/' + current_user.nuotrauka)
     return render_template('paskyra.html', title='Account', form=form, nuotrauka=nuotrauka)

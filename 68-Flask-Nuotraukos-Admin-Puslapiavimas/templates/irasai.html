@@ -4,13 +4,8 @@
 {% if visi_irasai %}
 {% for irasas in visi_irasai.items %}
 <hr>
-{% if irasas.pajamos %}
-<p>Pajamos: {{irasas.suma}}</p>
-<p>Data: {{ datetime.strftime(irasas.data, "%Y-%m-%d %H:%M:%S")}}</p>
-{% else %}
-<p>Išlaidos: {{irasas.suma}}</p>
+<p>Irasas: {{irasas.irasas}}</p>
 <p>Data: {{irasas.data}}</p>
-{% endif %}
 {% endfor %}
 <hr>
 {% for page_num in visi_irasai.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
