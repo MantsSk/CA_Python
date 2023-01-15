@@ -99,11 +99,10 @@ def account():
 @app.route("/irasai")
 @login_required
 def records():
-    page = request.args.get('page', 1, type=int)
     visi_irasai = Irasas.query.filter_by(vartotojas_id=current_user.id).order_by(
         Irasas.data.desc()).all()
-    print(visi_irasai[0].vartotojas.irasai[0].irasas)
-    print(visi_irasai)
+    # print(visi_irasai[0].vartotojas.irasai[0].irasas)
+    # print(visi_irasai)
     return render_template("irasai.html", visi_irasai=visi_irasai, datetime=datetime.datetime)
 
 
