@@ -6,56 +6,56 @@
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">Prisiregistruokite</legend>
                 <div class="form-group">
-                    {{ form.username.label(class="form-control-label") }}
+                    {{ form.vardas.label(class="form-control-label") }}
 
-                    {% if form.username.errors %}
-                        {{ form.username(class="form-control form-control-lg is-invalid") }}
+                    {% if form.vardas.errors %}
+                        {{ form.vardas(class="form-control form-control-lg is-invalid") }}
                         <div class="invalid-feedback">
-                            {% for error in form.username.errors %}
+                            {% for error in form.vardas.errors %}
                                 <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.username(class="form-control form-control-lg") }}
+                        {{ form.vardas(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
                 <div class="form-group">
-                    {{ form.email.label(class="form-control-label") }}
-                    {% if form.email.errors %}
-                        {{ form.email(class="form-control form-control-lg is-invalid") }}
+                    {{ form.el_pastas.label(class="form-control-label") }}
+                    {% if form.el_pastas.errors %}
+                        {{ form.el_pastas(class="form-control form-control-lg is-invalid") }}
                         <div class="invalid-feedback">
-                            {% for error in form.email.errors %}
+                            {% for error in form.el_pastas.errors %}
                                 <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.email(class="form-control form-control-lg") }}
+                        {{ form.el_pastas(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
                 <div class="form-group">
-                    {{ form.password.label(class="form-control-label") }}
-                    {% if form.password.errors %}
-                        {{ form.password(class="form-control form-control-lg is-invalid") }}
+                    {{ form.slaptazodis.label(class="form-control-label") }}
+                    {% if form.slaptazodis.errors %}
+                        {{ form.slaptazodis(class="form-control form-control-lg is-invalid") }}
                         <div class="invalid-feedback">
-                            {% for error in form.password.errors %}
+                            {% for error in form.slaptazodis.errors %}
                                 <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.password(class="form-control form-control-lg") }}
+                        {{ form.slaptazodis(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
                 <div class="form-group">
-                    {{ form.verified_password.label(class="form-control-label") }}
-                    {% if form.verified_password.errors %}
-                        {{ form.verified_password(class="form-control form-control-lg is-invalid") }}
+                    {{ form.patvirtintas_slaptazodis.label(class="form-control-label") }}
+                    {% if form.patvirtintas_slaptazodis.errors %}
+                        {{ form.patvirtintas_slaptazodis(class="form-control form-control-lg is-invalid") }}
                         <div class="invalid-feedback">
-                            {% for error in form.verified_password.errors %}
+                            {% for error in form.patvirtintas_slaptazodis.errors %}
                                 <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.verified_password(class="form-control form-control-lg") }}
+                        {{ form.patvirtintas_slaptazodis(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
             </fieldset>
@@ -66,7 +66,7 @@
     </div>
     <div class="border-top pt-3">
         <small class="text-muted">
-<!--            Already Have An Account? <a class="ml-2" href="{{ url_for('index') }}">Sign In</a>-->
+            Jau turi paskyrą? <a class="ml-2" href="{{ url_for('prisijungti') }}">Prisijunk</a>
         </small>
     </div>
 {% endblock content %}
