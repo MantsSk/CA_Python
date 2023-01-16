@@ -65,41 +65,6 @@ def load_user(vartotojo_id):
     return Vartotojas.query.get(int(vartotojo_id))
 
 
-def password_check(password):
-    """
-    Verify the strength of 'password'
-    Returns a dict indicating the wrong criteria
-    A password is considered strong if:
-        8 characters length or more
-        1 digit or more
-        1 symbol or more
-        1 uppercase letter or more
-        1 lowercase letter or more
-    """
-
-    # calculating the length
-    length_error = len(password) < 8
-
-    # searching for digits
-    digit_error = re.search(r"\d", password) is None
-
-    # searching for uppercase
-    uppercase_error = re.search(r"[A-Z]", password) is None
-
-    # searching for lowercase
-    lowercase_error = re.search(r"[a-z]", password) is None
-
-    # searching for symbols
-    symbol_error = re.search(
-        r"[ !#$%&'()*+,-./[\\\]^_`{|}~"+r'"]', password) is None
-
-    # overall result
-    password_ok = not (
-        length_error or digit_error or uppercase_error or lowercase_error or symbol_error)
-
-    return password_ok
-
-
 def save_picture(form_picture):
     random_hex = secrets.token_hex(8)
     _, f_ext = os.path.splitext(form_picture.filename)
@@ -122,17 +87,14 @@ def registruotis():
         return redirect(url_for('index'))
     form = forms.RegistracijosForma()
     if form.validate_on_submit():
-        if password_check(form.slaptazodis.data):
-            koduotas_slaptazodis = bcrypt.generate_password_hash(
-                form.slaptazodis.data).decode('utf-8')
-            vartotojas = Vartotojas(
-                vardas=form.vardas.data, el_pastas=form.el_pastas.data, slaptazodis=koduotas_slaptazodis)
-            db.session.add(vartotojas)
-            db.session.commit()
-            flash('Sėkmingai prisiregistravote! Galite prisijungti', 'success')
-            return redirect(url_for('index'))
-        else:
-            flash('Slaptazodis neatitinka reikalavimu', 'danger')
+        koduotas_slaptazodis = bcrypt.generate_password_hash(
+            form.slaptazodis.data).decode('utf-8')
+        vartotojas = Vartotojas(
+            vardas=form.vardas.data, el_pastas=form.el_pastas.data, slaptazodis=koduotas_slaptazodis)
+        db.session.add(vartotojas)
+        db.session.commit()
+        flash('Sėkmingai prisiregistravote! Galite prisijungti', 'success')
+        return redirect(url_for('index'))
     return render_template('registruotis.html', title='Register', form=form)
 
 
@@ -171,7 +133,7 @@ def account():
         current_user.el_pastas = form.el_pastas.data
         db.session.commit()
         flash('Tavo paskyra atnaujinta!', 'success')
-        return redirect(url_for('paskyra'))
+        return redirect(url_for('account'))
     form.vardas.data = current_user.vardas
     form.el_pastas.data = current_user.el_pastas
     nuotrauka = url_for(
