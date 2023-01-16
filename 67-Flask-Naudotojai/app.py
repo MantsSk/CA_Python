@@ -67,7 +67,6 @@ def my_records():
 @login_required
 def all_records():
     visi_irasai = Irasas.query.all()
-    print(visi_irasai[2].vartotojas.vardas)
     return render_template("visi_irasai.html", visi_irasai=visi_irasai, datetime=datetime.datetime)
 
 @app.route("/registruotis", methods=['GET', 'POST'])
