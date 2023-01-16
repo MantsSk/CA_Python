@@ -8,7 +8,7 @@
 {% for irasas in visi_irasai %}
 <hr>
 <p>Irasas: {{irasas.irasas}}</p>
-<p> bla </p>
+<p> {{ irasas.data }} </p>
 <p>Postinimo data: {{ datetime.strftime(irasas.data, "%Y-%m-%d %H:%M:%S")}}</p>
 {% else %}
 {% endfor %}

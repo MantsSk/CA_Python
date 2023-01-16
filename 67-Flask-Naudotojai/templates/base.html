@@ -29,21 +29,21 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
+                {% if current_user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link" href="/">Home</a>
+                    <a class="nav-link" href="/paskyra">{{ current_user.vardas }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" >|</a>
                 </li>
-                {% if current_user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link" href="/irasai">Įrašai</a>
+                    <a class="nav-link" href="/visi_irasai">Visi įrašai</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/mano_irasai">Mano įrašai</a>
                 </li>
                 <li class="nav-item">
                     <a class ="nav-link" href="/naujas_irasas">Naujas irasas</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/paskyra">Paskyra</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/atsijungti">Atsijungti</a>
