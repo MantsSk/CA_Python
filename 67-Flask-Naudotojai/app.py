@@ -58,8 +58,10 @@ def registruotis():
     if form.validate_on_submit():
         koduotas_slaptazodis = bcrypt.generate_password_hash(
             form.slaptazodis.data).decode('utf-8')
+        vardas = form.vardas.data
+        el_pastas = form.el_pastas.data
         vartotojas = Vartotojas(
-            vardas=form.vardas.data, el_pastas=form.el_pastas.data, slaptazodis=koduotas_slaptazodis)
+            vardas=vardas, el_pastas=el_pastas, slaptazodis=koduotas_slaptazodis)
         db.session.add(vartotojas)
         db.session.commit()
         flash('Sėkmingai prisiregistravote! Galite prisijungti', 'success')

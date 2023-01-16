@@ -13,17 +13,26 @@ class RegistracijosForma(FlaskForm):
                                              EqualTo('slaptazodis', "Slaptažodis turi sutapti.")])
     submit = SubmitField('Prisiregistruoti')
 
-    def tikrinti_varda(self, vardas):
-        vartotojas = app.Vartotojas.query.filter_by(vardas=vardas.data).first()
-        if vartotojas:
-            raise ValidationError('Šis vardas panaudotas. Pasirinkite kitą.')
+    def validate_vardas(self, vardas):
+        with app.app.app_context():
+            print("hey")
+            print(vardas.data)
+            vartotojas = app.Vartotojas.query.filter_by(
+                vardas=vardas.data).first()
+            if vartotojas:
+                raise ValidationError(
+                    'Šis el. pašto adresas panaudotas. Pasirinkite kitą.')
 
-    def tikrinti_pasta(self, el_pastas):
-        vartotojas = app.Vartotojas.query.filter_by(
-            el_pastas=el_pastas.data).first()
-        if vartotojas:
-            raise ValidationError(
-                'Šis el. pašto adresas panaudotas. Pasirinkite kitą.')
+    def validate_el_pastas(self, el_pastas):
+        with app.app.app_context():
+            print("hey")
+            print(el_pastas.data)
+            vartotojas = app.Vartotojas.query.filter_by(
+                el_pastas=el_pastas.data).first()
+            print(vartotojas)
+            if vartotojas:
+                raise ValidationError(
+                    'Šis vardas panaudotas. Pasirinkite kitą.')
 
 
 class PaskyrosAtnaujinimoForma(FlaskForm):
