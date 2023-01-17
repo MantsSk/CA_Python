@@ -1,11 +1,10 @@
-from flask_wtf.file import FileField, FileAllowed
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileField, FileAllowed
 from flask_login import current_user
-from wtforms import SubmitField, BooleanField, StringField, PasswordField, TextAreaField
+from wtforms import SubmitField, BooleanField, StringField, PasswordField, TextAreaField, EmailField
 from wtforms.validators import DataRequired, ValidationError, EqualTo
-import app
+import app 
 import re
-
 
 def utility_password_check(password):
     """
@@ -43,28 +42,23 @@ def utility_password_check(password):
 
 
 class RegistracijosForma(FlaskForm):
-    vardas = StringField('Vardas', [DataRequired()])
-    el_pastas = StringField('El. paštas', [DataRequired()])
-    slaptazodis = PasswordField('Slaptažodis', [DataRequired()])
-    patvirtintas_slaptazodis = PasswordField("Pakartokite slaptažodį", [
-                                             EqualTo('slaptazodis', "Slaptažodis turi sutapti.")])
-    submit = SubmitField('Prisiregistruoti')
+    vardas = StringField("Vardas", [DataRequired()])
+    el_pastas = EmailField("El.pastas", [DataRequired()]) 
+    slaptazodis = PasswordField("Slaptazodis", [DataRequired()])
+    patvirtintas_slaptazodis = PasswordField("Pakartokite slaptazodi", [EqualTo('slaptazodis', "Slaptazodis turi but toks pats")])
+    submit = SubmitField("Prisiregistruoti")
 
     def validate_vardas(self, vardas):
         with app.app.app_context():
-            vartotojas = app.Vartotojas.query.filter_by(
-                vardas=vardas.data).first()
+            vartotojas = app.Vartotojas.query.filter_by(vardas=vardas.data).first()
             if vartotojas:
-                raise ValidationError(
-                    'Šis vardas panaudotas. Pasirinkite kitą.')
+                raise ValidationError("Sis vardas jau yra musu duomenu bazeje")
 
     def validate_el_pastas(self, el_pastas):
         with app.app.app_context():
-            vartotojas = app.Vartotojas.query.filter_by(
-                el_pastas=el_pastas.data).first()
+            vartotojas = app.Vartotojas.query.filter_by(el_pastas=el_pastas.data).first()
             if vartotojas:
-                raise ValidationError(
-                    'Šis el.pastas panaudotas. Pasirinkite kitą.')
+                raise ValidationError("Sis vardas jau yra musu duomenu bazeje")
 
     def validate_slaptazodis(self, slaptazdodis):
         tinkamas_slaptazodis = utility_password_check(slaptazdodis.data)
@@ -72,41 +66,32 @@ class RegistracijosForma(FlaskForm):
         if not tinkamas_slaptazodis:
             raise ValidationError("Slaptazodis netinkamas")
 
-
 class PaskyrosAtnaujinimoForma(FlaskForm):
-    vardas = StringField('Vardas', [DataRequired()])
-    el_pastas = StringField('El. paštas', [DataRequired()])
-    nuotrauka = FileField('Atnaujinti profilio nuotrauką',
-                          validators=[FileAllowed(['jpg', 'png'])])
-    submit = SubmitField('Atnaujinti')
+    vardas = StringField("Vardas", [DataRequired()])
+    el_pastas = EmailField("El.pastas", [DataRequired()]) 
+    nuotrauka = FileField("Atnaujinti profilio nuotrauka", validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
+    submit = SubmitField("Atnaujinti")
 
     def validate_vardas(self, vardas):
         if current_user.vardas != vardas.data:
             with app.app.app_context():
-                vartotojas = app.Vartotojas.query.filter_by(
-                    vardas=vardas.data).first()
+                vartotojas = app.Vartotojas.query.filter_by(vardas=vardas.data).first()
                 if vartotojas:
-                    raise ValidationError(
-                        'Šis vardas panaudotas. Pasirinkite kitą.')
+                    raise ValidationError("Sis vardas jau yra musu duomenu bazeje")
 
     def validate_el_pastas(self, el_pastas):
-        print(current_user.el_pastas)
         if current_user.el_pastas != el_pastas.data:
             with app.app.app_context():
-                vartotojas = app.Vartotojas.query.filter_by(
-                    el_pastas=el_pastas.data).first()
-                print(vartotojas)
+                vartotojas = app.Vartotojas.query.filter_by(el_pastas=el_pastas.data).first()
                 if vartotojas:
-                    raise ValidationError(
-                        'Šis el.pastas panaudotas. Pasirinkite kitą.')
+                    raise ValidationError("Sis el pastas jau yra musu duomenu bazeje")
 
 
 class PrisijungimoForma(FlaskForm):
-    el_pastas = StringField('El. paštas', [DataRequired()])
-    slaptazodis = PasswordField('Slaptažodis', [DataRequired()])
+    el_pastas = EmailField("El.pastas", [DataRequired()]) 
+    slaptazodis = PasswordField("Slaptazodis", [DataRequired()])
     prisiminti = BooleanField("Prisiminti mane")
-    submit = SubmitField('Prisijungti')
-
+    submit = SubmitField("Prisijungti")
 
 class IrasasForm(FlaskForm):
     irasas = TextAreaField('Irasas', [DataRequired()])
