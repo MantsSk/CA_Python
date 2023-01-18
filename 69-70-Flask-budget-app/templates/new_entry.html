@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form method="post">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        {{ form.sum.label(class="form-control-label") }}
+        {{ form.sum(class="form-control") }}
+    </div>
+    <div class="form-check">
+        {{ form.income.label(class="form-check-input") }}
+        <br>
+        {{ form.income(class="form-check-label") }}
+    </div>
+    <br>
+    {{ form.submit }}
+</form>
+{% endblock %}

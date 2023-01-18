@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    {% if all_entries %}
+        {% for entry in all_entries %}
+            {% if entry.income %}
+                <p>Income: {{entry.sum}}</p>
+                <p>Date: {{ datetime.strftime(entry.date, "%Y-%m-%d %H:%M:%S")}}</p>
+            {% else %}
+                <p>Expenses: {{entry.sum}}</p>
+                <p>Date: {{ datetime.strftime(entry.date, "%Y-%m-%d %H:%M:%S")}}</p>
+            {% endif %}
+        <a href="{{ url_for('delete', id=entry['id']) }}">Delete</a>
+        <a href="{{ url_for('update', id=entry['id']) }}">Update</a>
+        {% endfor %}
+    {% endif %}
+
+    <p><a href="{{ url_for('new_entry')}}">New</a></p>
+
+{% endblock %}
