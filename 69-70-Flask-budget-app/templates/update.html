@@ -2,17 +2,30 @@
 
 {% block content %}
 
-<form method="post" action="#">
-    {{ form.hidden_tag() }}
-    <div class="form-group">
-        {{ form.sum.label(class="form-control-label") }}
-        {{ form.sum(class="form-control", value=entry.sum) }}
-    </div>
-    <div class="form-check">
-        {{ form.income.label(class="form-check-label") }}
-        {{ form.income(class="form-check-input", checked=entry.income) }}
-    </div>
-     <br>
-    {{ form.submit }}
-</form>
-{% endblock %}
+<div class='content-section'>
+    <form method='POST'>
+        {{ form.hidden_tag() }}
+        <div class='form-group'>
+            {{ form.sum.label(class="form-control-label") }}
+            {% if form.sum.errors %}
+                {{ form.sum(class="form-control form-control-lg is-invalid") }}
+                <div class='invalid-feedback'>
+                    {% for error in form.sum.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.sum(class="form-control form-control-lg") }}
+            {% endif %}
+        </div>
+        <div class='form-group'>
+            {{ form.income.label(class="form-check-label") }}
+            {{ form.income(class="form-check-input") }}
+        </div>
+        <div class='form-group'>
+            {{ form.submit(class="btn btn-outline-info") }}
+        </div>
+    </form>
+</div>
+
+{% endblock content %}
