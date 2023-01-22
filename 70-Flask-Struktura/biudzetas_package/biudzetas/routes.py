@@ -23,7 +23,8 @@ def registruotis():
         return redirect(url_for('index'))
     form = RegistracijosForma()
     if form.validate_on_submit():
-        koduotas_slaptazodis = bcrypt.generate_password_hash(form.slaptazodis.data).decode('utf-8')
+        koduotas_slaptazodis = bcrypt.generate_password_hash(
+            form.slaptazodis.data).decode('utf-8')
         vartotojas = Vartotojas(vardas=form.vardas.data, el_pastas=form.el_pastas.data,
                                 slaptazodis=koduotas_slaptazodis)
         db.session.add(vartotojas)
@@ -39,7 +40,8 @@ def prisijungti():
         return redirect(url_for('index'))
     form = PrisijungimoForma()
     if form.validate_on_submit():
-        user = Vartotojas.query.filter_by(el_pastas=form.el_pastas.data).first()
+        user = Vartotojas.query.filter_by(
+            el_pastas=form.el_pastas.data).first()
         if user and bcrypt.check_password_hash(user.slaptazodis, form.slaptazodis.data):
             login_user(user, remember=form.prisiminti.data)
             next_page = request.args.get('next')
@@ -60,10 +62,10 @@ def atsijungti():
 # def irasai():
 #     return render_template('irasai.html', title='Įrašai')
 
-@app.route("/admin")
-@login_required
-def admin():
-    return redirect(url_for(admin))
+# @app.route("/admin")
+# @login_required
+# def admin():
+#     return redirect('admin')
 
 
 @app.route("/irasai")
@@ -81,7 +83,8 @@ def new_record():
     db.create_all()
     forma = IrasasForm()
     if forma.validate_on_submit():
-        naujas_irasas = Irasas(pajamos=forma.pajamos.data, suma=forma.suma.data, vartotojas_id=current_user.id)
+        naujas_irasas = Irasas(pajamos=forma.pajamos.data,
+                               suma=forma.suma.data, vartotojas_id=current_user.id)
         db.session.add(naujas_irasas)
         db.session.commit()
         flash(f"Įrašas sukurtas", 'success')
@@ -133,7 +136,8 @@ def save_picture(form_picture):
     random_hex = secrets.token_hex(8)
     _, f_ext = os.path.splitext(form_picture.filename)
     picture_fn = random_hex + f_ext
-    picture_path = os.path.join(app.root_path, 'static/profilio_nuotraukos', picture_fn)
+    picture_path = os.path.join(
+        app.root_path, 'static/profilio_nuotraukos', picture_fn)
 
     output_size = (125, 125)
     i = Image.open(form_picture)
@@ -159,12 +163,13 @@ def paskyra():
     elif request.method == 'GET':
         form.vardas.data = current_user.vardas
         form.el_pastas.data = current_user.el_pastas
-    nuotrauka = url_for('static', filename='profilio_nuotraukos/' + current_user.nuotrauka)
+    nuotrauka = url_for(
+        'static', filename='profilio_nuotraukos/' + current_user.nuotrauka)
     return render_template('paskyra.html', title='Account', form=form, nuotrauka=nuotrauka)
 
 
 def send_reset_email(user):
-    token = user.get_reset_token()
+    token = Vartotojas.get_reset_token(user)
     msg = Message('Slaptažodžio atnaujinimo užklausa',
                   sender='pythonkursascodeacademy@gmail.com',
                   recipients=[user.el_pastas])
@@ -182,9 +187,11 @@ def reset_request():
         return redirect(url_for('home'))
     form = UzklausosAtnaujinimoForma()
     if form.validate_on_submit():
-        user = Vartotojas.query.filter_by(el_pastas=form.el_pastas.data).first()
+        user = Vartotojas.query.filter_by(
+            el_pastas=form.el_pastas.data).first()
         send_reset_email(user)
-        flash('Jums išsiųstas el. laiškas su slaptažodžio atnaujinimo instrukcijomis.', 'info')
+        flash(
+            'Jums išsiųstas el. laiškas su slaptažodžio atnaujinimo instrukcijomis.', 'info')
         return redirect(url_for('prisijungti'))
     return render_template('reset_request.html', title='Reset Password', form=form)
 
@@ -199,7 +206,8 @@ def reset_token(token):
         return redirect(url_for('reset_request'))
     form = SlaptazodzioAtnaujinimoForma()
     if form.validate_on_submit():
-        hashed_password = bcrypt.generate_password_hash(form.slaptazodis.data).decode('utf-8')
+        hashed_password = bcrypt.generate_password_hash(
+            form.slaptazodis.data).decode('utf-8')
         user.slaptazodis = hashed_password
         db.session.commit()
         flash('Tavo slaptažodis buvo atnaujintas! Gali prisijungti', 'success')

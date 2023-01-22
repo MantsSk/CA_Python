@@ -1,5 +1,3 @@
-from biudzetas import routes
-from biudzetas.models import Vartotojas, Irasas
 import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
@@ -17,8 +15,11 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
+from biudzetas.models import Vartotojas, Irasas
 
-db.create_all()
+with app.app_context():
+    db.create_all()
+
 bcrypt = Bcrypt(app)
 mail = Mail(app)
 login_manager = LoginManager(app)
@@ -33,7 +34,7 @@ def load_user(vartotojo_id):
 
 class ManoModelView(ModelView):
     def is_accessible(self):
-        return current_user.is_authenticated and current_user.el_pastas == "donoras@gmail.com"
+        return current_user.is_authenticated and current_user.el_pastas == "mantas.skara@gmail.com"
 
 
 admin = Admin(app)
@@ -43,6 +44,9 @@ admin.add_view(ManoModelView(Irasas, db.session))
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
+
+from biudzetas import routes
+
 
 # app.config['MAIL_USERNAME'] = MAIL_USERNAME
 # app.config['MAIL_PASSWORD'] = MAIL_PASSWORD

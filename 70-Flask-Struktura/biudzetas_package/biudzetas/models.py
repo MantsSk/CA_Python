@@ -8,13 +8,16 @@ class Vartotojas(db.Model, UserMixin):
     __tablename__ = "vartotojas"
     id = db.Column(db.Integer, primary_key=True)
     vardas = db.Column("Vardas", db.String(20), unique=True, nullable=False)
-    el_pastas = db.Column("El. pašto adresas", db.String(120), unique=True, nullable=False)
+    el_pastas = db.Column("El. pašto adresas", db.String(
+        120), unique=True, nullable=False)
     nuotrauka = db.Column(db.String(20), nullable=False, default='default.jpg')
-    slaptazodis = db.Column("Slaptažodis", db.String(60), unique=True, nullable=False)
+    slaptazodis = db.Column("Slaptažodis", db.String(60),
+                            unique=True, nullable=False)
 
-    def get_reset_token(self, expires_sec=1800):
+    @staticmethod
+    def get_reset_token(user, expires_sec=1800):
         s = Serializer(app.config['SECRET_KEY'], expires_sec)
-        return s.dumps({'user_id': self.id}).decode('utf-8')
+        return s.dumps({'user_id': user.id}).decode('utf-8')
 
     @staticmethod
     def verify_reset_token(token):
@@ -26,7 +29,7 @@ class Vartotojas(db.Model, UserMixin):
         return Vartotojas.query.get(user_id)
 
     def __repr__(self):
-        return f"User('{self.username}', '{self.email}', '{self.image_file}')"
+        return f"User('{self.vardas}', '{self.el_pastas}')"
 
 
 class Irasas(db.Model):
