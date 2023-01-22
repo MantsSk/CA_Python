@@ -1,5 +1,5 @@
-from biudzetas import routes
-from biudzetas.models import Vartotojas, Irasas
+from irasai.routes import routes
+from irasai.models import Vartotojas, Irasas
 import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
