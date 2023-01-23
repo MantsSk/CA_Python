@@ -1,1 +1,1 @@
-password = "pqopmgzsnainzvgv"
+password = "test"
