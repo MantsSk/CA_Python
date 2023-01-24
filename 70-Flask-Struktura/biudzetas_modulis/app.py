@@ -140,12 +140,6 @@ def atsijungti():
 #     return render_template('irasai.html', title='Įrašai')
 
 
-@app.route("/admin")
-@login_required
-def admin():
-    return redirect(url_for(admin))
-
-
 @app.route("/irasai")
 @login_required
 def records():
