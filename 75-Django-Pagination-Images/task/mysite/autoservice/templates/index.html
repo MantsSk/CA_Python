@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Autoservice</h1>
+  <p>Our stats:</p>
+  <ul>
+    <li><strong>Cars:</strong> {{ car_count }}</li>
+    <li><strong>Services:</strong> {{ service_count }}</li>
+    <li><strong>Orders:</strong> {{ order_count }}</li>
+  </ul>
+{% endblock %}

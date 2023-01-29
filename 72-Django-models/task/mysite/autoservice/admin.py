@@ -6,4 +6,3 @@ admin.site.register(CarMake)
 admin.site.register(Order)
 admin.site.register(OrderService)
 admin.site.register(Service)
-# Register your models here.

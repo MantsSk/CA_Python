@@ -3,14 +3,6 @@ from django.db import models
 # Create your models here.
 
 
-class Automobilio_modelis(models.Model):
-    name = models.CharField(
-        'Title', max_length=200, help_text='Input book\'s genre (for example: detective)')
-
-    def __str__(self):
-        return self.name
-
-
 class CarMake(models.Model):
     make = models.CharField('Make', max_length=20,
                             help_text='Car make', null=False)

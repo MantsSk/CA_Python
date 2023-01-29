@@ -1,36 +1,31 @@
+from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponse
+from .models import Book, Author, BookInstance, Genre
+from django.views import generic
 from django.core.paginator import Paginator
 from django.db.models import Q
-from django.shortcuts import get_object_or_404, render
 
-from django.http import HttpResponse
-
-from django.shortcuts import render
-from django.urls import reverse
-from django.http import HttpResponse
-from django.views import generic
-from .models import Book, Author, BookInstance, Genre
 
 def index(request):
 
     # Suskaičiuokime keletą pagrindinių objektų
-    num_books = Book.objects.all().count()
-    num_instances = BookInstance.objects.all().count()
+    book_count = Book.objects.all().count()
+    book_instance_count = BookInstance.objects.all().count()
 
-    # Laisvos knygos (tos, kurios turi statusą 'g')
-    num_instances_available = BookInstance.objects.filter(status__exact='a').count()
+    # Laisvos knygos (tos, kurios turi statusą 'av')
+    available_book_instances_available = BookInstance.objects.filter(
+        status='av').count()
 
-    # Kiek yra autorių
-    num_authors = Author.objects.count()
+    # Autorių skaičius
+    author_count = Author.objects.all().count()
 
-    # perduodame informaciją į šabloną žodyno pavidale:
     context = {
-        'num_books': num_books,
-        'num_instances': num_instances,
-        'num_instances_available': num_instances_available,
-        'num_authors': num_authors,
+        'book_count': book_count,
+        'book_instance_count': book_instance_count,
+        'available_book_instances_available': available_book_instances_available,
+        'author_count': author_count
     }
 
-    # renderiname index.html, su duomenimis kintamąjame context
     return render(request, 'index.html', context=context)
 
 
@@ -41,42 +36,48 @@ def authors(request):
     context = {
         'authors': paged_authors
     }
+
     return render(request, 'authors.html', context=context)
 
 
 def author(request, author_id):
-    single_author = get_object_or_404(Author, pk=author_id)
-
+    author = get_object_or_404(Author, pk=author_id)
     context = {
-        'author': single_author
+        'author': author
     }
-    return render(request, 'author.html', context)
+    return render(request, 'author.html', context=context)
 
 
 def search(request):
     """
     paprasta paieška. query ima informaciją iš paieškos laukelio,
     search_results prafiltruoja pagal įvestą tekstą knygų pavadinimus ir aprašymus.
-    Icontains nuo contains skiriasi tuo, kad icontains ignoruoja ar raidės
+    Icontains nuo contains skiriasi tuo, kad icontains ignoruoja ar raidės 
     didžiosios/mažosios.
     """
     query = request.GET.get('query')
-    search_results = Book.objects.filter(Q(title__icontains=query) | Q(summary__icontains=query))
-    author_results = Author.objects.filter(Q(first_name__icontains=query) | Q(last_name__icontains=query))
-    book_instances = BookInstance.objects.filter(Q(book__author__first_name__icontains=query))
-    return render(request, 'search.html', {'books': search_results,
-                                           'authors': author_results,
-                                           'book_instances': book_instances,
-                                           'query': query})
+    search_results = Book.objects.filter(
+        Q(title__icontains=query) | Q(summary__icontains=query))
+    return render(request, 'search.html', {'books': search_results, 'query': query})
 
 
 class BookListView(generic.ListView):
     model = Book
+    template_name = 'book_list.html'
+    context_object_name = 'book_list'
+    template_name = 'book_list.html'
     paginate_by = 2
-    template_name = "book_list.html"
+    #queryset = Book.objects.filter(title='Title 1')
+
+    # def get_queryset(self):
+    #    return Book.objects.filter(title='Title 1')
+
+    def get_context_data(self, **kwargs):
+        context = super(BookListView, self).get_context_data(**kwargs)
+        context['duomenys'] = 'Random text'
+        return context
 
 
 class BookDetailView(generic.DetailView):
     model = Book
-    template_name = "book_detail.html"
-
+    template_name = 'book_detail.html'

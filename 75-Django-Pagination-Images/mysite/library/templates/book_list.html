@@ -1,29 +1,32 @@
 {% extends "base.html" %}
+
 {% block content %}
-<h1>Knygų sąrašas</h1>
-<h1>{{ duomenys }}</h1>
-{% if book_list %}
-{% load static %}
-<ul>
-    {% for book in page_obj %}
-    {% if book.cover %}
-    <img src="{{ book.cover.url }}" class="card-img-top" alt="...">
-    {% else %}
-    <img src="{% static '/img/no-image.jpg' %}" class="card-img-top">
-    {% endif %}
-    <li>
-        <a href="{{ book.id }}">{{ book.title }}</a> ({{book.author}})
-    </li>
-    {% endfor %}
-</ul>
-{% else %}
-<p>Bibliotekoje knygų nėra.</p>
-{% endif %}
-<div class="pagination">
+  {% load static %}
+  <h1>Book list</h1>
+  {% if book_list %}
+  <div class="row">
+      {% for book in book_list %}
+          <div class="col-md-4 d-flex align-items-stretch">
+            <div class="card mb-4 shadow-sm">
+              {% if book.cover_image %}
+                <img src="{{ book.cover_image.url }}" class="card-img-top" alt="...">
+              {% else %}
+                <img src="{% static 'img/no-image.png' %}" class="card-img-top">
+              {% endif %}
+              <div class="card-body">
+                <h6 class="card-subtitle mb-2 text-muted">{{ book.author }}</h6>
+                <p class="card-text"><a href="{% url 'book-detail' book.id %}">{{ book.title }}</a></p>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+  </div>
+
+    <div class="pagination">
       <span class="step-links">
           {% if page_obj.has_previous %}
-              <a href="?page=1">&laquo; pirmas</a>
-              <a href="?page={{ page_obj.previous_page_number }}">atgal</a>
+              <a href="?page=1">&laquo; first</a>
+              <a href="?page={{ page_obj.previous_page_number }}">back</a>
           {% endif %}
 
           <span class="current">
@@ -31,9 +34,12 @@
           </span>
 
           {% if page_obj.has_next %}
-              <a href="?page={{ page_obj.next_page_number }}">pirmyn</a>
-              <a href="?page={{ page_obj.paginator.num_pages }}">paskutinis &raquo;</a>
+              <a href="?page={{ page_obj.next_page_number }}">forward</a>
+              <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
           {% endif %}
       </span>
-</div>
+    </div>       
+  {% else %}
+    <p>No books</p>
+  {% endif %}
 {% endblock %}
