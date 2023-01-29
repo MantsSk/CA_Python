@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Autoservice</h1>
+  <p>Orders:</p>
+  <ul>
+    {% for order in orders %}
+        <li><a href='{% url "order-detail" order.id %}'>{{ order.date }} {{ order.car }}</a></li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

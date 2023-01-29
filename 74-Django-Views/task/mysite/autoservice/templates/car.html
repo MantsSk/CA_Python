@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Autoservice</h1>
+  <p>{{ car.car_make }}</p>
+  <li><strong>License plate:</strong> {{ car.license_plate }}</li>
+  <li><strong>VIN code:</strong> {{ car.vin_code }}</li>
+  <li><strong>Client:</strong> {{ car.client }}</li>
+
+{% endblock %}

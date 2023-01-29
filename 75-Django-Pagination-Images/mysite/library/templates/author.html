@@ -7,9 +7,9 @@
     <p>{{ author.description }}</p>
     </hr>
     </br>
-    <h5>Mes turime šias {{ author.first_name }} {{ author.last_name }} knygas:</h5>
-    {% for i in author.books.all %}
-       <li>{{ i.title }}</li> 
+    <h5>We have these {{ author.first_name }} {{ author.last_name }} books:</h5>
+    {% for book in author.books.all %}
+       <li>{{ book.title }}</li> 
     {% endfor %}
     </div>
 {% endblock %}
