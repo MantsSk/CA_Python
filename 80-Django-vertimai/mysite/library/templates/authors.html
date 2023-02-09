@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Authors</h1>
+  {% for author in authors %}
+    <li><a href='{% url "author" author.id %}'>{{ author.first_name }} {{ author.last_name }}</a></li>
+  {% endfor %}
+  {% if authors.has_other_pages %}
+      <ul class="pagination pagination-sm justify-content-end">
+          {% for i in authors.paginator.page_range %}
+              {% if authors.number == i %}
+                  <li class="page-item active">
+                      <a class="page-link">{{ i }}</a>
+                  </li>
+              {% else %}
+                  <li class="page-item">
+                      <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                  </li>
+              {% endif %}
+          {% endfor %}
+      </ul>
+  {% endif %}
+{% endblock %}

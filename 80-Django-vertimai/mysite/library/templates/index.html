@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+  <h1>{% trans "Local library" %}</h1>
+  <p>{% trans "Welcome to my Library" %}</p>
+  <p>{% trans "Today we have:" %}</p>
+  <ul title="{% blocktrans %} List {% endblocktrans %}">
+    <li><strong>{% trans "Books" %}:</strong> {{ num_books }}</li>
+    <li><strong>{% trans "Book Instances" %}:</strong> {{ num_instances }}</li>
+    <li><strong>{% trans "Now Available" %}:</strong> {{ num_instances_available }}</li>
+    <li><strong>{% trans "Authors" %}:</strong> {{ num_authors }}</li>
+  </ul>
+
+<p>{% trans "Your visits:" %} {{ num_visits }}</p>
+{% endblock %}
