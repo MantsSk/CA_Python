@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Mano paimta knyga:</h1>
+    <hr>
+        <ul>
+        <img class="rounded-circle" src="{{object.reader.profilis.nuotrauka.url}}">
+        <li><strong class="{% if object.is_overdue %}text-danger{% endif %}">Pavadinimas: {{object.book.title}}</strong></li>
+        <li><strong>Gražinimo terminas:</strong> {{object.due_back}}</li>
+        <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'my-book-delete' object.pk %}">Atiduoti</a>
+        <br/>
+      </li>
+    </ul>
+{% endblock %}
