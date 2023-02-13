@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Autoservice</h1>
+  <p>Order:</p>
+  <p>Date: {{ order.date }}</p>
+  <p>Car: {{ order.car }}</p>
+  <p>Price: {{ order.sum }} </p>
+  <p>Services:</p>
+  <ul>
+    {% for order_service in order.orderservice_set.all %}
+      <li>{{ order_service }}</li>
+    {% endfor %}
+  </ul>
+</br>
+  <h4>Atsiliepimai:</h4>
+  {% if order.orderreview_set.all %}
+    {% for order in order.orderreview_set.all %}
+      <hr>
+      <strong>{{ order.reviewer }}</strong>, <em>{{ order.date_created}}</em>
+      <p>{{ order.content }}</p>
+    {% endfor %}
+  {% else %}
+    <p>No reviews</p>
+  {% endif %}
+  {% if user.is_authenticated %}
+  <div class="fieldWrapper">
+    <hr><br/>
+    <h4>Palikite atsiliepimą:</h4>
+    <form action="" method="post">
+      {% csrf_token %}
+      {{ form.content }}</br>
+      <input type="submit" value="Išsaugoti">
+    </form>
+  </div>
+  {% endif %}
+
+{% endblock %}

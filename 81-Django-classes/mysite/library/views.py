@@ -11,6 +11,7 @@ from django.contrib import messages
 from .forms import BookReviewForm, UserUpdateForm, ProfileUpdateForm
 from django.views.generic.edit import FormMixin
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 def index(request):
@@ -133,18 +134,6 @@ class BookDetailView(FormMixin, generic.DetailView):
         return super(BookDetailView, self).form_valid(form)
 
 
-from django.contrib.auth.mixins import LoginRequiredMixin
-
-
-class LoanedBooksByUserListView(LoginRequiredMixin, generic.ListView):
-    model = BookInstance
-    template_name = 'user_books.html'
-    paginate_by = 10
-
-    def get_queryset(self):
-        return BookInstance.objects.filter(reader=self.request.user).filter(status__exact='t').order_by('due_back')
-
-
 @csrf_protect
 def register(request):
     if request.method == "POST":
@@ -179,9 +168,38 @@ def register(request):
     return render(request, 'register.html')
 
 
+# class LoanedBooksByUserListView(LoginRequiredMixin, generic.ListView):
+#     model = BookInstance
+#     template_name = 'user_books.html'
+#     paginate_by = 10
+
+#     def get_queryset(self):
+#         return BookInstance.objects.filter(reader=self.request.user).filter(status__exact='t').order_by('due_back')
+
+# tas pats kas virsuj class based view, tiesiog naudojame funkcija klasikine
+
+def get_loaned_books(request):
+    paginator = Paginator(BookInstance.objects.all(), 10)
+    page_number = request.GET.get('page')
+    paged_bookinstances = paginator.get_page(page_number)
+    context = {
+        'bookinstance_list': paged_bookinstances
+    }
+
+    return render(request, 'user_books.html', context=context)
+
+
 class BookByUserDetailView(LoginRequiredMixin, generic.DetailView):
     model = BookInstance
     template_name = 'user_book.html'
+
+
+def get_loaned_book(request, book_id):
+    book = get_object_or_404(BookInstance, pk=book_id)
+    context = {
+        'object': book
+    }
+    return render(request, 'user_book.html', context=context)
 
 
 class BookByUserCreateView(LoginRequiredMixin, generic.CreateView):
