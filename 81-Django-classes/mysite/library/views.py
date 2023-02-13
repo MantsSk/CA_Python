@@ -223,3 +223,9 @@ class BookByUserDeleteView(LoginRequiredMixin, generic.DeleteView):
 
         book = self.get_object()
         return self.request.user == book.reader
+
+
+def delete_loaned_book(request, book_id):
+    book = BookInstance.objects.get(id=book_id)
+    book.delete()
+    return render(request, 'user_books.html')
