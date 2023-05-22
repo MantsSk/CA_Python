@@ -41,7 +41,10 @@ def asmens_kodo_generavimas(lytis, gimimo_data, eiles_numeris):
     pirmas_skaicius = ""
 
     data_split = gimimo_data.split("-")
+    print(data_split)
     metai = int(data_split[0][:2])
+
+    print(metai)
 
     if lytis == "vyras":
         pirmas_skaicius = str((int(metai) - 18) * 2 + 1)
@@ -60,4 +63,4 @@ def asmens_kodo_generavimas(lytis, gimimo_data, eiles_numeris):
 print(asmens_kodo_validacija(45102129987))
 print(asmens_kodo_validacija(61907108400))
 
-print(asmens_kodo_generavimas("vyras", "2000-12-12", "512"))
+print(asmens_kodo_generavimas("vyras", "1996-02-18", "512"))
