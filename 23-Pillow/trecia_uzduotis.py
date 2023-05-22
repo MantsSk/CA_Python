@@ -16,7 +16,7 @@ def pic_resize(pic, height):
     return im
 
 def optimize_images(folder, height):
-    os.mkdir(f'{folder}/optimized')
+    os.mkdir(f'{folder}/optimized') # bug su sukurimu folderio antra karta, jei matot padarykit PR'a :) 
     logo = Image.open('logo_cropped.png')
     pic_num = 0
     for i in get_list(folder):
@@ -31,4 +31,4 @@ def optimize_images(folder, height):
         pic_num += 1
         pic.save(f'{folder}/optimized/picture_{pic_num}.png')
 
-optimize_images(".", 200)
+optimize_images(".", 800)

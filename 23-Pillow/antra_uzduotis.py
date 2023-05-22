@@ -5,6 +5,7 @@ def enhance_image(pic, contrast, color, sharpness, brightness, save=False):
     im = Image.open(pic)
     enh = ImageEnhance.Contrast(im)
     im = enh.enhance(contrast)
+    print(type(im))
     enh = ImageEnhance.Color(im)
     im = enh.enhance(color)
     enh = ImageEnhance.Brightness(im)
