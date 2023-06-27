@@ -1,0 +1,20 @@
+html {
+    font-size: 12px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.bold {
+    font-weight: 700;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.skyblue {
+    color: rgb(20, 125, 225)
+}
+
+.green {
+    color: green;
+}
