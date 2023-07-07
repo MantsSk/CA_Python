@@ -4,7 +4,7 @@ body {
 
 .wrapper {
   max-width: 960px;
-  margin: 0 auto;
+  margin: auto;
 }
 
 header {
@@ -69,38 +69,11 @@ section:last-child {
   color: blue;
 }
 
-#contacts li:nth-child(1):before {
-  content: "\0260F";
-  color: black;
-  padding-right: 10px;
-}
-
-#contacts li:nth-child(2):before {
-  content: "\02709";
-  color: black;
-  padding-right: 10px;
-}
-
-#contacts li:nth-child(3):before {
-  content: "\02656";
-  color: black;
-  padding-right: 10px;
-}
-
-#contacts input:not(.btn),
-#contacts textarea {
-  display: block;
-  width: 100%;
-  resize: none;
-  margin-bottom: 10px;
-}
-
 #map img {
   width: 100%;
 }
 
 .btn {
-  display: inline-block;
   border: 0;
   background-color: #b8cb21;
   color: white;
