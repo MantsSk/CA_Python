@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            background-color: red;
+        }
+
+        .topnav {
+            overflow: hidden;
+            background-color: #333;
+          }
+          
+          /* Navbar links */
+          .topnav a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+          }
+          
+
+        /* CSS code */
+        @media (max-width: 600px) {
+            body {
+                background-color: blue;
+            }
+
+            div {
+                background-color: red;
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 1024px) {
+            p {
+                font-size: 30px;
+            }
+
+            .topnav a {
+                float: none;
+                width: 100%;
+              }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- HTML code -->
+    <div class="topnav">
+        <a href="#">Link</a>
+        <a href="#">Link</a>
+        <a href="#">Link</a>
+      </div>
+    <div>
+        <p>This is a div element.</p>
+    </div>
+</body>
+
+</html>

@@ -24,6 +24,10 @@
             padding: 20px;
             box-sizing: border-box;
         }
+        
+        .sidebar img {
+            width: 50%;
+        }
 
         .content {
             background-color: lightgreen;
@@ -34,8 +38,12 @@
 
         @media (max-width: 600px) {
             .sidebar {
-                flex-basis: 100%;
+                flex-basis: 60%;
                 background-color: lightblue;
+            }
+
+            .sidebar img {
+                width: 50%;
             }
 
             .content {
@@ -50,6 +58,7 @@
     <!-- HTML code -->
     <div class="container">
         <div class="sidebar">
+            <img src="https://elements.cloud/app/uploads/2022/08/happy-team.png" alt="happy team" />
             <h2>Sidebar</h2>
             <p>This is the sidebar content.</p>
         </div>
