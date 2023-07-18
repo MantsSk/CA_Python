@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Color Changing Button</title>
+    <style>
+        body {
+            background-color: #fff;
+            /* Set initial background color */
+        }
+    </style>
+</head>
+
+<body>
+    <button id="colorButton">Change Color</button>
+
+    <script>
+        // Function to generate a random color
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        // Function to change the background color
+        function changeBackgroundColor() {
+            var newColor = getRandomColor();
+            document.body.style.backgroundColor = newColor;
+        }
+
+        // Add event listener to the button
+        var button = document.getElementById('colorButton');
+        button.addEventListener('click', changeBackgroundColor);
+    </script>
+</body>
+
+</html>
