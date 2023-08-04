@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Student Records</title>
+</head>
+
+<body>
+    <h1>Student Records</h1>
+    <ul>
+        {% for student in students %}
+        <li>{{ student.name }} - Age: {{ student.age }} - Grade: {{ student.grade }}
+            <form action="{{ url_for('delete_student', id=student.id) }}" method="post" style="display: inline;">
+                <input type="submit" value="Delete">
+            </form>
+            <a href="{{ url_for('edit_student', id=student.id) }}">Edit</a>
+        </li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('add_student') }}">Add Student</a>
+</body>
+
+</html>
