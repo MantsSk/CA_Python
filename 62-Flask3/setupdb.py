@@ -6,13 +6,13 @@ with app.app_context():  # Reikia app konteksto, nes šis failas kitaip apie jį
     # db.session.query(Message).delete() # Jeigu reikia pravalyti lentelę
 
     # Iš karto inicijuosime testams keletą įrašų:
-    message1 = Message('John', 'john@email.com',
+    message1 = Message('John', 'john@email.com', 12132,
                        'Content 1')
-    message2 = Message('Sean', 'Sean@email.com',
+    message2 = Message('Sean', 'Sean@email.com', 34312,
                        'Content 2')
-    message3 = Message('Richy', 'richy@email.com',
+    message3 = Message('Richy', 'richy@email.com', 23412,
                        'Content 3')
-    message4 = Message('Rachel', 'rachel@email.com',
+    message4 = Message('Rachel', 'rachel@email.com', 32421,
                        'Content 4')
 
     # Pridėsime šias žinutes į mūsų DB

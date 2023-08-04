@@ -38,3 +38,6 @@ class Message(db.Model):
 
     def __repr__(self):  # Inbuilt funkcija - šios funkcijos grąžinama reikšmė naudojama spausdinant objektą (pavyzdžiui, spausdinant šios lentelės įrašą į konsolę)
         return f'{self.name} - {self.email}'
+
+if __name__ == '__main__':
+    app.run(port=8000, debug=True)
