@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Sukurti darbuotoja</h1>
+<form method="post" action="{{ url_for('sukurti_darbuotoja') }}">
+    {{ forma.hidden_tag() }}
+    <div class="form-group">
+        {{ forma.vardas.label(class="form-control-label") }}
+        {{ forma.vardas(class="form-control") }}
+    </div>
+    <div class="form-group">
+        {{ forma.pavarde.label(class="form-control-label") }}
+        {{ forma.pavarde(class="form-control") }}
+    </div>
+    <div class="form-group">
+        {{ forma.departamentas.label(class="form-control-label") }}
+        {{ forma.departamentas(class="form-control") }}
+    </div>
+    {{ forma.submit(class='btn btn-primary mt-4') }}
+</form>
+{% endblock content %}

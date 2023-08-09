@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Atnaujinti darbuotoja</h1>
+<h2>{{ darbuotojas['vardas'] }} {{ darbuotojas['pavarde'] }}</h2>
+<form method="post" action="{{ url_for('atnaujinti_darbuotoja', id=darbuotojas['id']) }}">
+    {{ forma.hidden_tag() }}
+    <div class="form-group">
+        {{ forma.vardas.label(class="form-control-label") }}
+        {{ forma.vardas(class="form-control", value=darbuotojas['vardas']) }}
+    </div>
+    <div class="form-group">
+        {{ forma.pavarde.label(class="form-control-label") }}
+        {{ forma.pavarde(class="form-control", value=darbuotojas['pavarde']) }}
+    </div>
+    <div class="form-group">
+        {{ forma.departamentas.label(class="form-control-label") }}
+        {{ forma.departamentas(class="form-control", value=darbuotojas['departamentas']) }}
+    </div>
+    {{ forma.submit(class='btn btn-primary mt-4') }}
+</form>
+{% endblock content %}

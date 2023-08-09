@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Sukurti departamenta</h1>
+<form method="post" action="{{ url_for('sukurti_departamenta') }}">
+    {{ forma.hidden_tag() }}
+    <div class="form-group">
+        {{ forma.pavadinimas.label(class="form-control-label") }}
+        {{ forma.pavadinimas(class="form-control") }}
+    </div>
+    {{ forma.submit(class='btn btn-primary mt-4') }}
+</form>
+{% endblock content %}
