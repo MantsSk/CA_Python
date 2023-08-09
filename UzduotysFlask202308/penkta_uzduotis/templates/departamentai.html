@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Departamentai</h1>
+<a href="{{ url_for('sukurti_departamenta') }}" class='btn btn-primary'>Sukurti departamenta</a>
+{% for departamentas in visi_departamentai %}
+    <h2><a href="{{ url_for('atnaujinti_departamenta',id=departamentas['id']) }}">{{ departamentas['pavadinimas'] }}</a></h2>
+    <h2>Darbuotojai:</h2>
+    {% for darbuotojas in departamentas['darbuotojai'] %}
+        <p>{{ darbuotojas['vardas'] }} {{ darbuotojas['pavarde'] }}</p>
+    {% endfor %}
+    <a href="{{ url_for('istrinti_departamenta',id=departamentas['id']) }}" class='btn btn-danger'>Trinti</a>
+    <div>--------------------------------</div>
+{% endfor %}
+{% endblock content %}
