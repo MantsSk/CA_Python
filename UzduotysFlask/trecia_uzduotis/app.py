@@ -38,9 +38,10 @@ class Darbuotojai(db.Model):
         return f'{self.vardas} - {self.pavarde}'
 
 
+@app.route('/')
 @app.route('/darbuotojai')
 def darbuotojai():
-    darbuotojai = Darbuotojai.query.limit(1).all()
+    darbuotojai = Darbuotojai.query.all()
     return render_template('darbuotojai.html', darbuotojai=darbuotojai)
 
 

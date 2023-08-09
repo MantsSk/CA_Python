@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Darbuotojas: {{ darbuotojas['vardas'] }}</h2>
+    <p>Pilnas vardas: {{ darbuotojas['vardas'] }} {{ darbuotojas['pavarde'] }}</p>
+    <p>El. paštas: {{ darbuotojas['el_pastas'] }}</p>
+    <p>Telefono numeris: {{ darbuotojas['tel_numeris'] }}</p>
+    <p>Alga: {{ darbuotojas['alga'] }}</p>
+{% endblock content %}
+
