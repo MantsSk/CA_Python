@@ -1,16 +1,16 @@
 import requests
 from bs4 import BeautifulSoup
 from time import sleep
-import pickle
 import sqlite3
-import os
 
-#Konstantos
+# Konstantos
 URL = 'http://quotes.toscrape.com'
 conn = sqlite3.connect('quotes.db')
 c = conn.cursor()
 
-#Lentelės sukūrimas
+# Lentelės sukūrimas
+
+
 def make_database():
     query = '''
     CREATE TABLE IF NOT EXISTS quotes(
@@ -22,6 +22,7 @@ def make_database():
     '''
     with conn:
         c.execute(query)
+
 
 def make_initials(name):
     '''
@@ -36,6 +37,7 @@ def make_initials(name):
             hint += i
     return hint
 
+
 def get_hint2(endpoint):
     '''
     funkcija, kuri paduotą endpointą prideda prie URL ir ištraukia antrą užuominą
@@ -45,7 +47,8 @@ def get_hint2(endpoint):
     text = soup.select('p')[1].get_text()
     return text
 
-def get_page(page):    
+
+def get_page(page):
     r = requests.get(URL + '/page/' + str(page)).text
     soup = BeautifulSoup(r, 'html.parser')
     quotes = soup.select('.quote')
@@ -60,17 +63,11 @@ def get_page(page):
         res.append((quote, author, hint1, hint2))
     return res
 
+
 big_list = []
 for i in range(10):
-    big_list += get_page(str(i+1))
+    big_list += get_page(str(i + 1))
 
 make_database()
 with conn:
     c.executemany('INSERT INTO quotes VALUES (?,?,?,?)', big_list)
-
-
-
-
-
-
-

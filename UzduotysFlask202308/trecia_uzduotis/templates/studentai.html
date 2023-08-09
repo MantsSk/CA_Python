@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Studentai</h1>
+    {% for studentas in studentai %}
+        <h2><a href="{{ url_for('studentas', id=studentas['id']) }}">{{ studentas['vardas'] }} {{ studentas['pavarde'] }}</a></h2>
+        <p>{{ studentas['el_pastas'] }}</p>
+        <a href="{{ url_for('istrinti_studenta', id=studentas['id']) }}" class='btn btn-danger'>Ištrinti</a>
+        <a href="{{ url_for('atnaujinti_studenta', id=studentas['id']) }}" class='btn btn-primary'>Atnaujinti</a>
+        <p>-----------------------------</p>
+    {% endfor %}
+{% endblock content%}
+        

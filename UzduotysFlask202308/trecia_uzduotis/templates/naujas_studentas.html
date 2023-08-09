@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <form action='{{ url_for("naujas_studentas") }}' method='post' novalidate>
+        {{ forma.hidden_tag() }}
+        <div class='form-group mt-4'>
+            {{ forma.vardas.label() }}
+            {{ forma.vardas(class="form-control") }}
+            {% for error in forma.vardas.errors %}
+                <small><div style='color:red;'>{{ error }}</div></small>
+            {% endfor %}
+        </div>
+        <div class='form-group mt-4'>
+            {{ forma.pavarde.label() }}
+            {{ forma.pavarde(class="form-control") }}
+            {% for error in forma.pavarde.errors %}
+                <small><div style='color:red;'>{{ error }}</div></small>
+            {% endfor %}
+    
+        </div>
+        <div class='form-group mt-4'>
+            {{ forma.el_pastas.label() }}
+            {{ forma.el_pastas(class="form-control") }}
+            {% for error in forma.el_pastas.errors %}
+                <small><div style='color:red;'>{{ error }}</div></small>
+            {% endfor %}
+        </div>
+        {{ forma.submit(class="btn btn-primary mt-4") }}
+    </form>
+{% endblock content %}
