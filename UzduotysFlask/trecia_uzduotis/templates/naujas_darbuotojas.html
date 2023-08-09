@@ -1,27 +1,40 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <form action='{{ url_for("atnaujinti_studenta", id=studentas.id) }}' method='post' novalidate>
+    <form action='{{ url_for("naujas_darbuotojas") }}' method='post' novalidate>
         {{ forma.hidden_tag() }}
         <div class='form-group mt-4'>
             {{ forma.vardas.label() }}
-            {{ forma.vardas(class="form-control", value=studentas.vardas) }}
+            {{ forma.vardas(class="form-control") }}
             {% for error in forma.vardas.errors %}
                 <small><div style='color:red;'>{{ error }}</div></small>
             {% endfor %}
         </div>
         <div class='form-group mt-4'>
             {{ forma.pavarde.label() }}
-            {{ forma.pavarde(class="form-control", value=studentas.pavarde) }}
+            {{ forma.pavarde(class="form-control") }}
             {% for error in forma.pavarde.errors %}
                 <small><div style='color:red;'>{{ error }}</div></small>
             {% endfor %}
-    
         </div>
         <div class='form-group mt-4'>
             {{ forma.el_pastas.label() }}
-            {{ forma.el_pastas(class="form-control", value=studentas.el_pastas) }}
+            {{ forma.el_pastas(class="form-control") }}
             {% for error in forma.el_pastas.errors %}
+                <small><div style='color:red;'>{{ error }}</div></small>
+            {% endfor %}
+        </div>
+        <div class='form-group mt-4'>
+            {{ forma.tel_numeris.label() }}
+            {{ forma.tel_numeris(class="form-control") }}
+            {% for error in forma.tel_numeris.errors %}
+                <small><div style='color:red;'>{{ error }}</div></small>
+            {% endfor %}
+        </div>
+        <div class='form-group mt-4'>
+            {{ forma.alga.label() }}
+            {{ forma.alga(class="form-control") }}
+            {% for error in forma.alga.errors %}
                 <small><div style='color:red;'>{{ error }}</div></small>
             {% endfor %}
         </div>

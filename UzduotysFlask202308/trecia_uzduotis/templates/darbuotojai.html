@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Darbuotojai</h1>
+    {% for darbuotojas in darbuotojai %}
+        <h2><a href="{{ url_for('darbuotojas', id=darbuotojas['id']) }}">{{ darbuotojas['vardas'] }} {{ darbuotojas['pavarde'] }}</a></h2>
+        <p>{{ darbuotojas['el_pastas'] }}</p>
+        <p>{{ darbuotojas['tel_numeris'] }}</p>
+        <p>{{ darbuotojas['alga'] }}</p>
+        <a href="{{ url_for('istrinti_darbuotoja', id=darbuotojas['id']) }}" class='btn btn-danger'>Ištrinti</a>
+        <p>-----------------------------</p>
+    {% endfor %}
+{% endblock content%}
+        

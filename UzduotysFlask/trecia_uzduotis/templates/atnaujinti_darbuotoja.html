@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <form action='{{ url_for("atnaujinti_darbuotoja", id=darbuotojas.id) }}' method='post' novalidate>
+        {{ forma.hidden_tag() }}
+        <div class='form-group mt-4'>
+            {{ forma.vardas.label() }}
+            {{ forma.vardas(class="form-control", value=darbuotojas.vardas) }}
+            {% for error in forma.vardas.errors %}
+                <small><div style='color:red;'>{{ error }}</div></small>
+            {% endfor %}
+        </div>
+        <div class='form-group mt-4'>
+            {{ forma.pavarde.label() }}
+            {{ forma.pavarde(class="form-control", value=darbuotojas.pavarde) }}
+            {% for error in forma.pavarde.errors %}
+                <small><div style='color:red;'>{{ error }}</div></small>
+            {% endfor %}
+        </div>
+        <div class='form-group mt-4'>
+            {{ forma.el_pastas.label() }}
+            {{ forma.el_pastas(class="form-control", value=darbuotojas.el_pastas) }}
+            {% for error in forma.el_pastas.errors %}
+                <small><div style='color:red;'>{{ error }}</div></small>
+            {% endfor %}
+        </div>
+        <div class='form-group mt-4'>
+            {{ forma.tel_numeris.label() }}
+            {{ forma.tel_numeris(class="form-control", value=darbuotojas.tel_numeris) }}
+            {% for error in forma.tel_numeris.errors %}
+                <small><div style='color:red;'>{{ error }}</div></small>
+            {% endfor %}
+        </div>
+        <div class='form-group mt-4'>
+            {{ forma.alga.label() }}
+            {{ forma.alga(class="form-control", value=darbuotojas.alga) }}
+            {% for error in forma.alga.errors %}
+                <small><div style='color:red;'>{{ error }}</div></small>
+            {% endfor %}
+        </div>
+        {{ forma.submit(class="btn btn-primary mt-4") }}
+    </form>
+{% endblock content %}
