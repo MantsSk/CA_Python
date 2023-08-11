@@ -4,8 +4,11 @@ from flask_migrate import Migrate
 import os
 import forms
 
+basedir = os.path.abspath(os.path.dirname(__file__))
+
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///darbas.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
+    os.path.join(basedir, 'data.sqlite')
 db = SQLAlchemy(app)
 Migrate(app, db)
 
