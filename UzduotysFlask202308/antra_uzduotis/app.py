@@ -23,7 +23,7 @@ class Studentai(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     vardas = db.Column(db.String(80), nullable=False)
     pavarde = db.Column(db.String(120), nullable=False)
-    el_pastas = db.Column(db.String(40), unique=True, nullable=False)
+    el_pastas = db.Column(db.String(40), nullable=False)
 
     def __init__(self, vardas, pavarde, el_pastas):
         self.vardas = vardas
