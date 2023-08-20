@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Čia yra vartotojo {{ current_user.vardas}} įrašai</h1>
+
+{% if visi_irasai %}
+{% for irasas in visi_irasai.items %}
+<hr>
+<p>Irasas: {{irasas.irasas}}</p>
+<p> {{ irasas.data }} </p>
+<p>Postinimo data: {{ datetime.strftime(irasas.data, "%Y-%m-%d %H:%M:%S")}}</p>
+{% else %}
+{% endfor %}
+
+{% for page_num in visi_irasai.iter_pages(left_edge=2, right_edge=2, left_current=2, right_current=2) %}
+  {% if page_num %}
+    {% if visi_irasai.page == page_num %}
+      <a class="btn btn-info mb-4" href="{{ url_for('my_records', page=page_num) }}">{{ page_num }}</a>
+    {% else %}
+      <a class="btn btn-outline-info mb-4" href="{{ url_for('my_records', page=page_num) }}">{{ page_num }}</a>
+    {% endif %}
+  {% else %}
+    ...
+  {% endif %}
+{% endfor %}
+
+{% endif %}
+
+{% endblock %}
