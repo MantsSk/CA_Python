@@ -7,35 +7,33 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'dfgsfdgsdfgsdfgsdf'
 
 
-@app.route('/items')
+@app.route('/')
 def index():
-    # Nusiųskite GET užklausą į savo API, kad gautumėte visus įrašus
-
-    # Vietoje tuščio sąrašo padarykite, kad būtų sąrašas įrašų, gautų iš API
-    items = []
+    r = requests.get('http://127.0.0.1:8000/items')
+    items = json.loads(r.text)
     return render_template("items.html", items=items)
 
 
 @app.route('/items/<id>')
 def item(id):
-    # Nusiųskite GET užklausą į savo API, kad gautumėte įrašą su atitinkamu ID
-
-    # Vietoje tuščio žodyno padarykite, kad būtų žodynas, gautas iš API
-    item = {}
+    r = requests.get(f'http://127.0.0.1:8000/items/{id}')
+    item = json.loads(r.text)
     return render_template("item.html", item=item)
 
 
 @app.route('/items/<id>/update', methods=['GET', 'POST'])
 def update_item(id):
-    # Nusiųskite GET užklausą į savo API, kad gautumėte įrašą su atitinkamu ID
-
-    # Vietoje tuščio žodyno padarykite, kad būtų žodynas, gautas iš API
-    item = {}
+    r = requests.get(f'http://127.0.0.1:8000/items/{id}')
+    item = json.loads(r.text)
     form = ItemForm()
     if form.validate_on_submit():
-        # Sukurti žodyną su informacija iš formos
-
-        # Nusiųsti PUT užklausą į savo API, kad atnaujintumėte įrašą su informacija iš formos.
+        new_item = {
+            'title': form.title.data,
+            'price': form.price.data,
+            'quantity': form.quantity.data
+        }
+        requests.put(
+            f'http://127.0.0.1:8000/items/{id}', json=new_item)
         return redirect(url_for('item', id=id))
     elif request.method == 'GET':
         form.title.data = item['title']
@@ -46,7 +44,7 @@ def update_item(id):
 
 @app.route('/delete/<id>')
 def delete_item(id):
-    # Nusiųsti DELETE užklausą į savo API, kad ištrintumėte įrašą
+    r = requests.delete(f'http://127.0.0.1:8000/items/{id}')
     return redirect(url_for('index'))
 
 
@@ -54,9 +52,12 @@ def delete_item(id):
 def new_item():
     form = ItemForm()
     if form.validate_on_submit():
-        # Sukurti žodyną su informacija iš formos
-
-        # Nusiųsti POST užklausą į savo API, kad sukurtumėte naują įrašą su nauja informacija iš formos.
+        item = {
+            "title": form.title.data,
+            "price": form.price.data,
+            "quantity": form.quantity.data
+        }
+        r = requests.post('http://127.0.0.1:8000/items/new', json=item)
         return redirect(url_for('index'))
     return render_template("new_item.html", form=form)
 

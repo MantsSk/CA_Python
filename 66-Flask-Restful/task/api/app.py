@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
+from flask_migrate import Migrate
 import os
 
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -10,6 +11,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
 
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
+Migrate(app, db)
 
 
 # DB objektas
@@ -21,7 +23,7 @@ class Item(db.Model):
     quantity = db.Column('quantity', db.Integer)
 
 
-# Užduoties schema
+# Sukurkite schemą
 class ItemSchema(ma.Schema):
     class Meta:
         fields = ('id', 'title', 'price', 'quantity')
@@ -31,55 +33,44 @@ item_schema = ItemSchema()
 items_schema = ItemSchema(many=True)
 
 
-# Crud
+# Sukurti įrašo sukūrimo endpointą
 @app.route('/items/new', methods=['POST'])
 def add_item():
-    db.create_all()
-    title = request.json['title']
-    price = request.json['price']
-    quantity = request.json['quantity']
-    new_item = Item(title=title, price=price, quantity=quantity)
-    db.session.add(new_item)
-    db.session.commit()
-    return item_schema.jsonify(new_item)
+    # Kodą rašyti čia
+    return {'message': 'Item created!'}
 
 
-# cRud
+# Sukurti visų įrašų informacijos grąžinimo endpointą
 @app.route('/items', methods=['GET'])
 def all_items():
-    db.create_all()
-    all_items = Item.query.all()
-    return items_schema.jsonify(all_items)
+    # Kodą rašyti čia
+
+    # Vietoje None reikia grąžinti visus įrašus
+    return None
 
 
-# cRud
+# Sukurti vieno įrašo informacijos grąžinimo endpointą
 @app.route('/items/<id>', methods=['GET'])
 def get_item(id):
-    db.create_all()
-    item = Item.query.get(id)
-    return item_schema.jsonify(item)
+    # Kodą rašyti čia
+
+    # Vietoje None reikia grąžinti įrašą
+    return None
 
 
-# crUd
+# Sukurti atnaujinimo endpoint'ą
 @app.route('/items/<id>', methods=['PUT'])
 def update_item(id):
-    item = Item.query.get(id)
-    item.title = request.json['title']
-    item.price = request.json['price']
-    item.quantity = request.json['quantity']
-    db.session.commit()
-    return item_schema.jsonify(item)
+    # Kodą rašyti čia
+    return {'message': 'Item updatedĄ'}
 
 
-# cruD
+# Sukurti ištrynimo endpoint'ą
 @app.route('/items/<id>', methods=['DELETE'])
 def delete_item(id):
-    item = Item.query.get(id)
-    db.session.delete(item)
-    db.session.commit()
-    return item_schema.jsonify(item)
+    # Kodą rašyti čia
+    return {'message': 'Item deleted!'}
 
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=8000, debug=True)
-    db.create_all()

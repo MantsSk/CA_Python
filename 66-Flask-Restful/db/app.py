@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
+from flask_migrate import Migrate
 import os
 
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -12,6 +13,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
 
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
+Migrate(app, db)
 
 
 class Task(db.Model):
@@ -34,7 +36,6 @@ tasks_schema = TaskSchema(many=True)
 # Crud
 @app.route('/tasks/new', methods=['POST'])
 def add_task():
-    db.create_all()
     title = request.json['title']
     done = request.json['done']
     new_task = Task(title=title, done=done)
