@@ -1,35 +1,19 @@
-import os
-from flask import Flask, render_template, flash, redirect, url_for, request
-from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager, current_user, logout_user, login_user, UserMixin, login_required
-import forms
-from flask_bcrypt import Bcrypt
+
+from flask import render_template, flash, redirect, url_for, request
+from flask_login import current_user, logout_user, login_user, login_required
 import datetime
 from PIL import Image
 import secrets
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
-from flask_mail import Message, Mail
-from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+from flask_mail import Message
+from PIL import Image
+from irasai import mail
+import os
+from irasai import app, db, login_manager, bcrypt
+from .models import Irasas, Vartotojas
+from .forms import RegistracijosForma, PaskyrosAtnaujinimoForma, SlaptazodzioAtnaujinimoForma, IrasasForm, PrisijungimoForma, UzklausosAtnaujinimoForma
 
-basedir = os.path.abspath(os.path.dirname(__file__))
-app = Flask(__name__)
-app.config['SECRET_KEY'] = '4654f5dfadsrfasdr54e6rae'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blogas.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
-
-bcrypt = Bcrypt(app)
-login_manager = LoginManager(app)
-login_manager.login_view = "prisijungti"
-
-app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-app.config['MAIL_PORT'] = 587
-app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = "codeacademytest80@gmail.com"
-app.config['MAIL_PASSWORD'] = "eqblnpvgdtzqmvsk"
-
-mail = Mail(app)
 
 def send_reset_email(user):
     token = user.get_reset_token()
@@ -42,35 +26,6 @@ def send_reset_email(user):
     '''
     mail.send(msg)
 
-class Irasas(db.Model):
-    __tablename__ = "irasas"
-    id = db.Column(db.Integer, primary_key=True)
-    data = db.Column("Data", db.DateTime)
-    irasas = db.Column("irasas", db.String(20))
-    vartotojas_id = db.Column(db.Integer, db.ForeignKey("vartotojas.id"))
-    vartotojas = db.relationship("Vartotojas", backref="irasai")
-
-class Vartotojas(db.Model, UserMixin):
-    __tablename__ = "vartotojas"
-    id = db.Column(db.Integer, primary_key=True)
-    vardas = db.Column("Vardas", db.String(20), unique=True, nullable=False)
-    el_pastas = db.Column("El.Pastas", db.String(120), unique=True, nullable=False)
-    nuotrauka = db.Column("Nuotrauka", db.String(20), nullable=False, default="default.jpg")
-    slaptazodis = db.Column("Slaptazodis", db.String(60), unique=True, nullable=False)
-
-    def get_reset_token(self, expires_sec=600):
-        s = Serializer(app.config["SECRET_KEY"], expires_sec)
-        print("id yra", self.id)
-        return s.dumps({'user_id': self.id}).decode('utf-8')
-
-    @staticmethod
-    def verify_reset_token(token):
-        s = Serializer(app.config['SECRET_KEY'])
-        try:
-            user_id = s.loads(token)['user_id']
-        except:
-            return None
-        return Vartotojas.query.get(user_id)
 
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
@@ -110,7 +65,7 @@ def index():
 @app.route("/naujas_irasas", methods=['GET', 'POST'])
 @login_required
 def new_record():
-    form = forms.IrasasForm()
+    form = IrasasForm()
     if form.validate_on_submit():
         naujas_irasas = Irasas(irasas=form.irasas.data, vartotojas_id=current_user.id, data=datetime.datetime.now())
         db.session.add(naujas_irasas)
@@ -135,7 +90,7 @@ def all_records():
 
 @app.route("/registruotis", methods=['GET', 'POST'])
 def registruotis():
-    form = forms.RegistracijosForma()
+    form = RegistracijosForma()
     if form.validate_on_submit():
         vardas = form.vardas.data
         el_pastas = form.el_pastas.data
@@ -151,7 +106,7 @@ def registruotis():
 def prisijungti():
     if current_user.is_authenticated:
         return redirect(url_for('index'))
-    form = forms.PrisijungimoForma()
+    form = PrisijungimoForma()
     if form.validate_on_submit():
         user = Vartotojas.query.filter_by(el_pastas=form.el_pastas.data).first()
         if user and bcrypt.check_password_hash(user.slaptazodis, form.slaptazodis.data):
@@ -171,7 +126,7 @@ def atsijungti():
 @app.route("/paskyra", methods=['GET', 'POST'])
 @login_required
 def account(): 
-    form = forms.PaskyrosAtnaujinimoForma()
+    form = PaskyrosAtnaujinimoForma()
     if form.validate_on_submit():
         if form.nuotrauka.data:
             # print(form.nuotrauka.data.filename)
@@ -191,7 +146,7 @@ def account():
 def reset_request():
     if current_user.is_authenticated:
         return redirect(url_for("home")) # pakeisti i index
-    form = forms.UzklausosAtnaujinimoForma()
+    form = UzklausosAtnaujinimoForma()
     if form.validate_on_submit():
         user = Vartotojas.query.filter_by(el_pastas=form.el_pastas.data).first()
         send_reset_email(user)
@@ -207,7 +162,7 @@ def reset_password(token):
     if user is None:
         flash("Uzklausa netinka arba pasibaigusio galiojima", "warning")
         return redirect(url_for("reset_request"))
-    form = forms.SlaptazodzioAtnaujinimoForma()
+    form = SlaptazodzioAtnaujinimoForma()
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.slaptazodis.data).decode('utf-8')
         user.slaptazodis = hashed_password
@@ -220,6 +175,3 @@ def reset_password(token):
 def page_error(error):
     # error galime perduoti i template
     return render_template('error.html', error=error)
-
-if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=8000, debug=True)
