@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <!-- 1. Paprasta registracija su HTML -->
+    <div class="container register">
+        <h3>Register</h3><br/>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="username">Nickname</label>
+                <input name="username" type="text" class="form-control" id="username" aria-describedby="usernameHelp">
+                <small id="usernameHelp" class="form-text text-muted">Up to 150 characters.</small>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Email</label>
+                <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <small id="emailHelp" class="form-text text-muted">
+                    Email will be used only for sending you your password
+                </small>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input name="password" type="password" class="form-control" id="password" aria-describedby="pwdHelp">
+                <small id="pwdHelp" class="form-text text-muted">
+                    Minimum 8 characters. At least 1 letter and 1 number
+                </small>
+            </div>
+            <div class="form-group">
+                <label for="password2">Repeat password</label>
+                <input name="password2" type="password" class="form-control" id="password2" aria-describedby="pwd2Help">
+            </div>
+            <button type="submit" class="btn btn-primary register-button">Register</button>
+        </form>
+        <p>Already have an account? <a href="{% url 'login' %}"><strong>Log in.</strong></a></p>
+    </div>
+
+    <!-- User creation form-->
+    <div class="container register">
+        <h3>Register</h3><br/>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary register-button">Register</button>
+        </form>
+        <p>Already have an account? <a href="{% url 'login' %}"><strong>Log in.</strong></a></p>
+    </div>
+
+{% endblock %}

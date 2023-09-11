@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Library</h1>
+  <p>Our stats:</p>
+  <ul>
+    <li><strong>Books:</strong> {{ book_count }}</li>
+    <li><strong>Book copies:</strong> {{ book_instance_count }}</li>
+    <li><strong>Book copies available:</strong> {{ available_book_instances_available }}</li>
+    <li><strong>Authors:</strong> {{ author_count }}</li>
+    <li><strong>Visits:</strong> {{ num_visits }}</li>
+  </ul>
+
+  <h1>Add a Review</h1>
+
+  <!-- Form using HTML -->
+  <form method="post" action="">
+      {% csrf_token %}
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required><br>
+
+      <label for="comment">Comment:</label>
+      <textarea id="comment" name="comment" rows="4" cols="50" required></textarea><br>
+
+      <input type="submit" value="Submit">
+  </form>
+
+  <br/>
+
+  <!-- Form using Custom Form -->
+  <form method="post" action="">
+    {% csrf_token %}
+     {{ form.as_p}}
+    <input type="submit" value="Submit">
+  </form>
+
+  <br/>
+
+    <!-- Form using Model Form -->
+    <form method="post" action="">
+      {% csrf_token %}
+       {{ model_form.as_p}}
+      <input type="submit" value="Submit">
+    </form>  
+
+{% endblock %}
