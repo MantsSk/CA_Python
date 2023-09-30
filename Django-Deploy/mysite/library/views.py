@@ -8,10 +8,9 @@ from django.shortcuts import redirect
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_protect
 from django.contrib import messages
-from .forms import BookReviewForm, UserUpdateForm, ProfileUpdateForm
+from .forms import BookReviewForm
 from django.views.generic.edit import FormMixin
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.utils.translation import gettext as _
 
 
 def index(request):
@@ -41,29 +40,6 @@ def index(request):
     }
 
     return render(request, 'index.html', context=context)
-
-
-@login_required
-def profile(request):
-    if request.method == "POST":
-        u_form = UserUpdateForm(request.POST, instance=request.user)
-        p_form = ProfileUpdateForm(
-            request.POST, request.FILES, instance=request.user.profile)
-        if u_form.is_valid() and p_form.is_valid():
-            u_form.save()
-            p_form.save()
-            messages.success(request, f"Profilis atnaujintas")
-            return redirect('profile')
-    else:
-        u_form = UserUpdateForm(instance=request.user)
-        p_form = ProfileUpdateForm(instance=request.user.profile)
-
-    context = {
-        'u_form': u_form,
-        'p_form': p_form,
-    }
-
-    return render(request, 'profile.html', context)
 
 
 def authors(request):
@@ -134,6 +110,18 @@ class BookDetailView(FormMixin, generic.DetailView):
         return super(BookDetailView, self).form_valid(form)
 
 
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+
+class LoanedBooksByUserListView(LoginRequiredMixin, generic.ListView):
+    model = BookInstance
+    template_name = 'user_books.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        return BookInstance.objects.filter(reader=self.request.user).filter(status__exact='t').order_by('due_back')
+
+
 @csrf_protect
 def register(request):
     if request.method == "POST":
@@ -146,14 +134,14 @@ def register(request):
         if password == password2:
             # tikriname, ar neužimtas username
             if User.objects.filter(username=username).exists():
-                messages.error(
-                    request, f'Vartotojo vardas {username} užimtas!')
+                messages.error(request, _(
+                    'Username %s already exists!') % username)
                 return redirect('register')
             else:
                 # tikriname, ar nėra tokio pat email
                 if User.objects.filter(email=email).exists():
-                    messages.error(
-                        request, f'Vartotojas su el. paštu {email} jau užregistruotas!')
+                    messages.error(request, _(
+                        'Email %s already exists!') % email)
                     return redirect('register')
                 else:
                     # jeigu viskas tvarkoje, sukuriame naują vartotoją
@@ -163,68 +151,6 @@ def register(request):
                         request, f'Vartotojas {username} užregistruotas!')
                     return redirect('login')
         else:
-            messages.error(request, 'Slaptažodžiai nesutampa!')
+            messages.error(request, _('Passwords do not match!'))
             return redirect('register')
     return render(request, 'register.html')
-
-
-# class LoanedBooksByUserListView(LoginRequiredMixin, generic.ListView):
-#     model = BookInstance
-#     template_name = 'user_books.html'
-#     paginate_by = 10
-
-#     def get_queryset(self):
-#         return BookInstance.objects.filter(reader=self.request.user).filter(status__exact='t').order_by('due_back')
-
-# tas pats kas virsuj class based view, tiesiog naudojame funkcija klasikine
-
-def get_loaned_books(request):
-    paginator = Paginator(BookInstance.objects.all(), 10)
-    page_number = request.GET.get('page')
-    paged_bookinstances = paginator.get_page(page_number)
-    context = {
-        'bookinstance_list': paged_bookinstances
-    }
-
-    return render(request, 'user_books.html', context=context)
-
-
-class BookByUserDetailView(LoginRequiredMixin, generic.DetailView):
-    model = BookInstance
-    template_name = 'user_book.html'
-
-
-def get_loaned_book(request, book_id):
-    book = get_object_or_404(BookInstance, pk=book_id)
-    context = {
-        'object': book
-    }
-    return render(request, 'user_book.html', context=context)
-
-
-class BookByUserCreateView(LoginRequiredMixin, generic.CreateView):
-    model = BookInstance
-    fields = ['book']
-    success_url = "/library/mybooks/"
-    template_name = 'user_book_new.html'
-
-    def form_valid(self, form):
-        form.instance.reader = self.request.user
-        form.instance.status = "t"
-        return super().form_valid(form)
-
-
-class BookByUserDeleteView(LoginRequiredMixin, generic.DeleteView):
-    model = BookInstance
-    success_url = "/library/mybooks/"
-    template_name = 'user_book_delete.html'
-
-    def test_func(self):
-        book = self.get_object()
-        return self.request.user == book.reader
-
-
-def delete_loaned_book(request, book_id):
-    book = BookInstance.objects.get(id=book_id)
-    book.delete()
-    return render(request, 'user_books.html')

@@ -1,0 +1,2 @@
+Django==4.2.5
+django_tinymce==3.5.0
