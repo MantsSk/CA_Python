@@ -1,5 +1,5 @@
-def sum_of_two_numbers(a, b, c):
+def sum_of_three_numbers(a, b, c):
     return a + b + c
 
 
-print(sum_of_two_numbers(2, 5, 7))
+print(sum_of_three_numbers(2, 5, 7))
